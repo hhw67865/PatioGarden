@@ -129,7 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_10_170346) do
     t.string "email"
     t.text "description"
     t.string "skill_level"
-    t.bigint "location_id", null: false
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_users_on_location_id"

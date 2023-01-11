@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :email
       t.text :description
       t.string :skill_level
-      t.belongs_to :location, null: false, foreign_key: true
+      t.belongs_to :location, foreign_key: true
 
       t.timestamps
     end

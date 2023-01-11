@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  belongs_to :location
+  belongs_to :location, required: false
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :commented_on_posts, through: :comments, source: :post

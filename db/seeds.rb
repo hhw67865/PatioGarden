@@ -60,7 +60,7 @@ end
     first_name = Faker::Name.first_name
     last_name = Faker::Name.last_name
     User.create(
-        username: "#{first_name}#{last_name}",
+        username: "#{first_name}#{last_name}".downcase,
         name: "#{first_name} #{last_name}",
         password: "Coding123!",
         email: "#{first_name}@gmail.com",
