@@ -31,6 +31,16 @@ class UsersController < ApplicationController
      head :no_content
    end
    
+   def available
+    
+    if User.find_by(username: params[:username])
+      render json: {availability: true}, status: :ok
+    else
+      render json: {availability: false}, status: :ok
+    end
+    
+   end
+
    private
    
    def model_params

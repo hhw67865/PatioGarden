@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   
     post '/signup', to: "users#create"
 
+    get "/user/:username", to: 'users#available'
+
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

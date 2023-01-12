@@ -4,10 +4,11 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 import {useState} from 'react'
+import {Link} from '@mui/material';
 
 
 
-const Login = ({openLogin, setOpenLogin, setUser}) => {
+const Login = ({openLogin, setOpenLogin, setUser, setOpenSignup}) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -33,6 +34,10 @@ const Login = ({openLogin, setOpenLogin, setUser}) => {
             })
           }
         })
+    }
+    function handleToSignup () {
+      setOpenLogin(false)
+      setOpenSignup(true)
     }
 
   return (
@@ -69,8 +74,11 @@ const Login = ({openLogin, setOpenLogin, setUser}) => {
                     
                     <Button type="submit" variant="outlined" sx={{p:'rem', marginTop:'2rem'}}>
                         Login
-                    </Button>
+                    </Button>                    
                 </form>
+                <Typography variant="body1" component="p">
+                    No Account? <Link onClick={handleToSignup} style={{fontWeight:'bold'}} component="button" variant="body1" underline="none"> Create one </Link>
+                </Typography>
             </Box>
 
         </Modal>

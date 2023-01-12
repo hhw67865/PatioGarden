@@ -6,15 +6,25 @@ import { Typography } from '@mui/material';
 import { useState } from 'react'
 import ParkIcon from '@mui/icons-material/Park';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import {Link} from '@mui/material';
+import { useTransition } from 'react'
+import InputAdornment from '@mui/material/InputAdornment';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ClearIcon from '@mui/icons-material/Clear';
+
+
 
 
 const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
+
+    const [isPending, startTransition] = useTransition()
 
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         password: ""
     })
+    const [isAvailable, setIsAvailable] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [errors, setErrors] = useState(null)
     const [confirmation, setConfirmation] = useState(false)
@@ -60,6 +70,27 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
           }
         })
     }
+    function checkAvailability (e) {
+        if (e.target.value.length>4) {
+        fetch(`/api/user/${e.target.value}`)
+        .then(r=>r.json())
+        .then(obj=>{
+            if (obj.availability) {
+                setIsAvailable(false)
+            }
+            else {
+                setIsAvailable(true)
+            }
+        })
+        }
+        else {
+            setIsAvailable(false)
+        }
+    }
+    function handleToLogin () {        
+        setOpenSignup(false)
+        setOpenLogin(true)
+    }
 
     return (
       <>
@@ -74,47 +105,68 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
                 {confirmation?<><Typography className="signup-confirmation" variant="h3" component="h3">
                     <CheckCircleOutlineIcon fontSize='large'/> Signup Complete!
                 </Typography></>:
-                <form className="modal-form" onSubmit={handleSubmit}>
-                    <TextField
-                        sx={{width:'60%'}}                   
-                        label="Username"                                            
-                        variant="standard"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                    /><br/>
-                    <TextField
-                        sx={{width:'60%'}}                   
-                        label="Email"                    
-                        variant="standard"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    /><br/>
-                    <TextField    
-                        sx={{width:'60%'}}                
-                        label="Password"
-                        type="password"
-                        variant="standard"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    /> <br/>
-                    <TextField
+                <>
+                    <form className="modal-form" onSubmit={handleSubmit}>
+                        <TextField
+                            sx={{width:'60%'}}                   
+                            label="Username"                                            
+                            variant="standard"
+                            name="username"
+                            value={formData.username}
+                            onChange={e=>{
+                                handleChange(e)
+                                startTransition(()=>{
+                                    checkAvailability(e)                                                                       
+                                })                                
+                            }}
+                            InputProps={isAvailable?
+                                {endAdornment: <InputAdornment position="end"><CheckCircleIcon style={{color:'chartreuse'}}/></InputAdornment>}
+                            :
+                                {endAdornment: <InputAdornment style={{fontSize:'12px'}} position="end"><ClearIcon style={{color:'red'}}/>Name Exists</InputAdornment>}
+
+                            }
                             
-                        required
-                        sx={{width:'60%'}}                
-                        label="Confirm Password"
-                        type="password"
-                        variant="standard"
-                        value={confirmPassword}
-                        onChange={(e)=>setConfirmPassword(e.target.value)}
-                    /> <br/>
-                    {errors?errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start", marginLeft:"20%"}} className="errors" variant="body2" component="p"><ParkIcon sx={{fontSize:"80%"}}/>  {error}</Typography>):null}
-                    <Button type="submit" variant="outlined" sx={{p:'rem', marginTop:'2rem'}}>
-                        Signup
-                    </Button>
-                </form>}
+                            
+
+                        /><br/>
+                        <TextField
+                            sx={{width:'60%'}}                   
+                            label="Email"                    
+                            variant="standard"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                        /><br/>
+                        <TextField    
+                            sx={{width:'60%'}}                
+                            label="Password"
+                            type="password"
+                            variant="standard"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                        /> <br/>
+                        <TextField
+                                
+                            required
+                            sx={{width:'60%'}}                
+                            label="Confirm Password"
+                            type="password"
+                            variant="standard"
+                            value={confirmPassword}
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
+                        /> <br/>
+                        {errors?errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start", marginLeft:"20%"}} className="errors" variant="body2" component="p"><ParkIcon sx={{fontSize:"80%"}}/>  {error}</Typography>):null}
+                        <Button type="submit" variant="outlined" sx={{p:'rem', marginTop:'2rem'}}>
+                            Signup
+                        </Button>
+                    </form>
+                    <Typography variant="body1" component="p">
+                        Already have an account? <Link onClick={handleToLogin} style={{fontWeight:'bold'}} component="button" variant="body1" underline="none"> Sign in </Link>
+                    </Typography>
+                </>
+                }
+                
             </Box>
   
           </Modal>
