@@ -4,11 +4,30 @@ import {Typography} from "@mui/material";
 import {TextField} from "@mui/material";
 import {Button} from "@mui/material";
 import {useState} from 'react'
+import InputAdornment from '@mui/material/InputAdornment';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ClearIcon from '@mui/icons-material/Clear';
 
-const UsernameModal = ({openUsername,setOpenUsername, user, setUserUpdate}) => {
+const UsernameModal = ({usernames,openUsername,setOpenUsername, user, setUserUpdate}) => {
 
     const [username, setUsername] = useState(user?user.username:"")
     const [errors, setErrors] = useState(null)
+    const [isAvailable, setIsAvailable] = useState(false)
+
+    function checkAvailability (e) {
+      if (e.target.value.length>4) {
+          if (usernames[e.target.value.toLowerCase()]) {
+              setIsAvailable(false)
+          } 
+          else {
+              setIsAvailable(true)
+          }
+      
+      }
+      else {
+          setIsAvailable(false)
+      }
+  }
 
     function submitForm (e) {
         e.preventDefault()
@@ -48,7 +67,11 @@ const UsernameModal = ({openUsername,setOpenUsername, user, setUserUpdate}) => {
                         variant="standard"
                         name="username"
                         value={username}
-                        onChange={e=>setUsername(e.target.value)}                       
+                        onChange={e=>{setUsername(e.target.value); checkAvailability(e)}}
+                        InputProps={isAvailable?
+                          {endAdornment: <InputAdornment position="end"><CheckCircleIcon style={{color:'chartreuse'}}/></InputAdornment>}
+                          :
+                          {endAdornment: <InputAdornment style={{fontSize:'12px'}} position="end"><ClearIcon style={{color:'red'}}/>Unavailable</InputAdornment>}}                       
                     /><br/>
                     
                     {errors?errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start"}} className="errors" variant="body2" component="p"> {error}</Typography>):<br/>}                    

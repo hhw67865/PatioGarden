@@ -10,10 +10,9 @@ import UsernameModal from './UsernameModal';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
-const Account = ({user, setUser, setUserUpdate}) => {
+const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUsername}) => {
 
   const [openEmail,setOpenEmail] = useState(false)
-  const [openUsername,setOpenUsername] = useState(false)
   const [openProfile,setOpenProfile] = useState(false)
   const [locations,setLocations] = useState([])
   const [oldPassword, setOldPassword] = useState("")
@@ -85,7 +84,7 @@ const Account = ({user, setUser, setUserUpdate}) => {
                     {user? user.username:null}
                 </Typography>
             </Button><br/>
-            <UsernameModal user={user} openUsername={openUsername} setOpenUsername={setOpenUsername} setUserUpdate={setUserUpdate}/>
+            <UsernameModal usernames={usernames} user={user} openUsername={openUsername} setOpenUsername={setOpenUsername} setUserUpdate={setUserUpdate}/>
 
             <Button onClick={()=>setOpenProfile(true)} className="account-info" sx={{textTransform:'none', textAlign:'start', width: '700px'}}>
                 <Typography sx={{alignSelf: "start", flex:'1'}} variant="body1" component="p">

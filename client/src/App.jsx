@@ -18,12 +18,13 @@ function App() {
   const [usernames, setUsernames] = useState({})
   const [openSignup,setOpenSignup] = useState(false)
   const [userUpdate, setUserUpdate] = useState(false)
+  const [openUsername,setOpenUsername] = useState(false)
 
   useEffect(()=>{
     fetch(`/api/usernames`)
     .then(r=>r.json())
     .then(obj=>setUsernames(obj.usernames))
-  },[user])
+  },[openSignup,openUsername])
 
   useEffect(()=>{
     fetch(`/api/authorized`)
@@ -43,7 +44,7 @@ function App() {
         <Route path="/plants" element={<Plants/>} />
         <Route path="/community" element={<Community/>} />
         <Route path="/profile" element={<Profile/>} />
-        {user?<Route path="/account" element={<Account setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
+        {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
         <Route path="/" element={<Home/>} />
         <Route path="*" element={<NotFound/>}/>
       </Routes>
