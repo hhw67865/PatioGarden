@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   
     post '/signup', to: "users#create"
 
-    get "/user/:username", to: 'users#available'
+    get "/usernames", to: 'users#usernames'
+
+    patch '/password/update', to: 'users#change_password'
 
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

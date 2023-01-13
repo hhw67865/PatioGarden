@@ -15,19 +15,20 @@ import {useNavigate} from 'react-router-dom';
 
 
 
-const Navbar = ({user, setUser}) => {
+const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
 
     let navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = useState(null)
     const [openLogin,setOpenLogin] = useState(false)
-    const [openSignup,setOpenSignup] = useState(false)
+    
 
     function handleLogout () {
         fetch(`/api/logout`, {method:"DELETE"})
         .then(r=>{
             if(r.ok) {
                 setUser(null)
+                setAnchorEl(null)
             }
         })
     }
@@ -74,8 +75,8 @@ const Navbar = ({user, setUser}) => {
                                 open={Boolean(anchorEl)}
                                 onClose={()=>setAnchorEl(null)}
                                 >
-                                <MenuItem onClick={()=>navigate("/profile")}><Typography textAlign="center">Profile</Typography></MenuItem>
-                                <MenuItem onClick={()=>navigate("/account")} ><Typography textAlign="center">Account</Typography></MenuItem>
+                                <MenuItem onClick={()=>{navigate("/profile"); setAnchorEl(null)}}><Typography textAlign="center">Profile</Typography></MenuItem>
+                                <MenuItem onClick={()=>{navigate("/account");setAnchorEl(null)}} ><Typography textAlign="center">Account</Typography></MenuItem>
                                 <MenuItem onClick={handleLogout}><Typography textAlign="center">Logout</Typography></MenuItem>
                             </Menu>
                         </>:
@@ -87,7 +88,7 @@ const Navbar = ({user, setUser}) => {
                             <Button onClick={()=>setOpenSignup(true)} sx={{  color: 'white', display: 'block' }}>
                                 Signup
                             </Button>
-                            <Signup setUser={setUser} setOpenLogin={setOpenLogin} openSignup={openSignup} setOpenSignup={setOpenSignup}/>
+                            <Signup usernames={usernames} setUser={setUser} setOpenLogin={setOpenLogin} openSignup={openSignup} setOpenSignup={setOpenSignup}/>
                         </Toolbar>}
                     </Box>
                 </Toolbar>

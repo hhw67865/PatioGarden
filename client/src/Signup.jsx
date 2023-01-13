@@ -10,15 +10,14 @@ import {Link} from '@mui/material';
 import { useTransition } from 'react'
 import InputAdornment from '@mui/material/InputAdornment';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CircularProgress from '@mui/material/CircularProgress';
 import ClearIcon from '@mui/icons-material/Clear';
 
 
 
 
-const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
-
-    const [isPending, startTransition] = useTransition()
-
+const Signup = ({openSignup, setOpenSignup, setOpenLogin, usernames}) => {
+    
     const [formData, setFormData] = useState({
         username: "",
         email: "",
@@ -72,16 +71,13 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
     }
     function checkAvailability (e) {
         if (e.target.value.length>4) {
-        fetch(`/api/user/${e.target.value}`)
-        .then(r=>r.json())
-        .then(obj=>{
-            if (obj.availability) {
+            if (usernames[e.target.value.toLowerCase()]) {
                 setIsAvailable(false)
-            }
+            } 
             else {
                 setIsAvailable(true)
             }
-        })
+        
         }
         else {
             setIsAvailable(false)
@@ -115,14 +111,13 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin}) => {
                             value={formData.username}
                             onChange={e=>{
                                 handleChange(e)
-                                startTransition(()=>{
-                                    checkAvailability(e)                                                                       
-                                })                                
-                            }}
+                                checkAvailability(e)                                                                     
+                                }                                
+                            }
                             InputProps={isAvailable?
                                 {endAdornment: <InputAdornment position="end"><CheckCircleIcon style={{color:'chartreuse'}}/></InputAdornment>}
                             :
-                                {endAdornment: <InputAdornment style={{fontSize:'12px'}} position="end"><ClearIcon style={{color:'red'}}/>Name Exists</InputAdornment>}
+                                {endAdornment: <InputAdornment style={{fontSize:'12px'}} position="end"><ClearIcon style={{color:'red'}}/>Unavailable</InputAdornment>}
 
                             }
                             

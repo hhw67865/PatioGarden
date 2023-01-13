@@ -23,9 +23,14 @@ const Login = ({openLogin, setOpenLogin, setUser, setOpenSignup}) => {
         })
         .then(r=>{
           if (r.ok) {
-            r.json().then(setUser)
-            setErrors(null)
-            setOpenLogin(false)
+            r.json().then((obj)=>{
+              setUser(obj)
+              setErrors(null)
+              setOpenLogin(false)
+              }
+              
+              )
+            
           }
           else {
             r.json().then((obj)=>{

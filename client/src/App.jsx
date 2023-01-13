@@ -8,12 +8,22 @@ import Home from './Home';
 import Community from './Community';
 import Profile from './Profile';
 import Account from './Account';
+import NotFound from './NotFound';
 
 
 
 function App() {
   
   const [user, setUser] = useState(null)
+  const [usernames, setUsernames] = useState({})
+  const [openSignup,setOpenSignup] = useState(false)
+  const [userUpdate, setUserUpdate] = useState(false)
+
+  useEffect(()=>{
+    fetch(`/api/usernames`)
+    .then(r=>r.json())
+    .then(obj=>setUsernames(obj.usernames))
+  },[user])
 
   useEffect(()=>{
     fetch(`/api/authorized`)
@@ -23,17 +33,19 @@ function App() {
       }
     })
     
-  },[])
+  },[userUpdate])
+
 
   return (
     <div className="App">
-      <Navbar user={user} setUser={setUser}/>
+      <Navbar usernames={usernames} user={user} setUser={setUser} openSignup={openSignup} setOpenSignup={setOpenSignup}/>
       <Routes>
         <Route path="/plants" element={<Plants/>} />
         <Route path="/community" element={<Community/>} />
         <Route path="/profile" element={<Profile/>} />
-        <Route path="/account" element={<Account/>} />
+        {user?<Route path="/account" element={<Account setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
         <Route path="/" element={<Home/>} />
+        <Route path="*" element={<NotFound/>}/>
       </Routes>
     </div>
   )

@@ -10,7 +10,7 @@ class Plant < ApplicationRecord
     has_many :locations, through: :plant_location_months
     has_many :months, through: :plant_location_months
 
-    validates :name, presence: true, uniqueness: true
+    validates :name, presence: true, uniqueness: { case_sensitive: false }
     validates :description, presence: true
     validates :care, presence: true
 end
