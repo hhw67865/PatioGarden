@@ -3,8 +3,12 @@ Rails.application.routes.draw do
     resources :follows
     resources :post_tags
     resources :comments
-    resources :posts
-    resources :users
+    resources :posts do
+      resources :comments, only: :index
+    end
+    resources :users, except: [:show,:update,:destroy] do
+      resources :posts, only: :index
+    end
     resources :plant_location_months
     resources :plant_problems
     resources :plant_pests
@@ -15,7 +19,11 @@ Rails.application.routes.draw do
     resources :pests
     resources :plants
 
-    get "/users/:id", to: 'users#show_user'
+    get "/users/:username", to: 'users#show_user'
+
+    patch "/users", to: 'users#update'
+
+    delete "users", to: 'users#destroy'
 
     post '/login', to: "sessions#create"
 

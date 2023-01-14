@@ -26,7 +26,7 @@ const ProfileModal = ({openProfile, setOpenProfile, locations, user, setUserUpda
 
     function submitForm (e) {
         e.preventDefault()
-        fetch(`/api/users/${user.id}`, {
+        fetch(`/api/users`, {
         method: "PATCH",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(formData)

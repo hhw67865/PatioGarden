@@ -6,14 +6,14 @@ class UsersController < ApplicationController
    def show
     user = User.find_by(id: session[:user_id])
     if user
-        render json: user, status: :ok
+        render json: user, serializer: MainuserSerializer, status: :ok
     else
         render json: { error: "Not Authorized" }, status: :unauthorized
     end
    end
 
    def show_user
-    render json: User.find(params[:id]), status: :ok
+    render json: User.find_by!(username: params[:username]), status: :ok
   end
    
    def create
@@ -23,11 +23,11 @@ class UsersController < ApplicationController
    def update
      instance = User.find(session[:user_id])
      instance.update!(model_params)
-     render json: instance, status: :accepted
+     render json: instance, serializer: MainuserSerializer, status: :accepted
    end
    
    def destroy
-     User.find(params[:id]).destroy
+     User.find(session[:user_id]).destroy
      head :no_content
    end
    

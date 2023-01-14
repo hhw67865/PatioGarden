@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
     
-# def index
-#   render json: Comment.all, status: :ok
-# end
+def index
+  if params[:post_id]
+    render json: Post.find(params[:post_id]).comments.order(created_at: :desc), status: :ok
+  else
+    render json: Comment.all, status: :ok
+  end
+end
 
 # def show
 #   render json: Comment.find(params[:id]), status: :ok

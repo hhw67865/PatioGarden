@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
    def index
+    if params[:user_id]
+      render json: User.find_by!(username: params[:user_id]).posts.order(created_at: :desc), status: :ok
+    else
      render json: Post.all, status: :ok
+    end
    end
    
    def show

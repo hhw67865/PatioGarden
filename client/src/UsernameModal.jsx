@@ -31,7 +31,7 @@ const UsernameModal = ({usernames,openUsername,setOpenUsername, user, setUserUpd
 
     function submitForm (e) {
         e.preventDefault()
-        fetch(`/api/users/${user.id}`, {
+        fetch(`/api/users`, {
         method: "PATCH",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({username: username})

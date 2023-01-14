@@ -73,3 +73,25 @@
   justify-content: center;
   align-items: start;
 }
+
+.profile-area-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-area-2 {
+  display: flex;
+  flex-direction: column;
+}
+
+.posts-followers-following {
+  display: flex;
+  text-align: center;
+  
+}
+
+.post-card {
+  width: 80%;
+  
+}

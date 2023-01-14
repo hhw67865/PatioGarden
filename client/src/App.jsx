@@ -43,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/plants" element={<Plants/>} />
         <Route path="/community" element={<Community/>} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
         <Route path="/" element={<Home/>} />
         <Route path="*" element={<NotFound/>}/>

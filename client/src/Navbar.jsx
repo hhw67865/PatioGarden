@@ -75,7 +75,7 @@ const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
                                 open={Boolean(anchorEl)}
                                 onClose={()=>setAnchorEl(null)}
                                 >
-                                <MenuItem onClick={()=>{navigate("/profile"); setAnchorEl(null)}}><Typography textAlign="center">Profile</Typography></MenuItem>
+                                <MenuItem onClick={()=>{navigate(`/profile/${user.username}`); setAnchorEl(null)}}><Typography textAlign="center">Profile</Typography></MenuItem>
                                 <MenuItem onClick={()=>{navigate("/account");setAnchorEl(null)}} ><Typography textAlign="center">Account</Typography></MenuItem>
                                 <MenuItem onClick={handleLogout}><Typography textAlign="center">Logout</Typography></MenuItem>
                             </Menu>
