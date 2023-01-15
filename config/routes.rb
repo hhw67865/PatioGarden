@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope 'api' do
-    resources :follows
+    resources :follows, only: :create
     resources :post_tags
     resources :comments
     resources :posts do
@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     get "/usernames", to: 'users#usernames'
 
     patch '/password/update', to: 'users#change_password'
+
+    delete '/unfollow', to: 'follows#destroy'
 
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import PostCard from './PostCard';
+import FollowButton from './FollowButton';
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -81,6 +82,7 @@ const Profile = ({user, setUserUpdate, userUpdate}) => {
   const [profileUser, setProfileUser] = useState(null)
   const [profilePosts, setProfilePosts] = useState([])
   
+  
 
   useEffect(()=> {
     fetch(`/api/users/${username}`)
@@ -90,13 +92,13 @@ const Profile = ({user, setUserUpdate, userUpdate}) => {
       }
       
     })
-  },[userUpdate])
+  },[userUpdate, username])
 
   useEffect(()=>{
     fetch(`/api/users/${username}/posts`)
     .then(r=>r.json())
     .then(setProfilePosts)
-  },[userUpdate])
+  },[userUpdate, username])
 
   if(!profileUser) {
     return (
@@ -113,7 +115,7 @@ const Profile = ({user, setUserUpdate, userUpdate}) => {
             {profileUser.username}
           </Typography>
           <Avatar sx={{ width: 200, height: 200 }}></Avatar>
-          <Button variant="contained" sx={{mt:'50px'}}> Follow </Button>
+          {user&&user.id!==profileUser.id&&<FollowButton setUserUpdate={setUserUpdate} user={user} profileUser={profileUser}/>}
         </Grid>
         <Grid className="profile-area-2" xs={7} >
           <Grid className="posts-followers-following" container spacing={10}>

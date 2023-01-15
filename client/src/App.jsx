@@ -9,6 +9,7 @@ import Community from './Community';
 import Profile from './Profile';
 import Account from './Account';
 import NotFound from './NotFound';
+import PlantPage from './PlantPage';
 
 
 
@@ -19,6 +20,7 @@ function App() {
   const [openSignup,setOpenSignup] = useState(false)
   const [userUpdate, setUserUpdate] = useState(false)
   const [openUsername,setOpenUsername] = useState(false)
+  const [plants, setPlants] = useState([])
 
   useEffect(()=>{
     fetch(`/api/usernames`)
@@ -36,12 +38,19 @@ function App() {
     
   },[userUpdate])
 
+  useEffect(()=>{
+    fetch(`/api/plants`)
+    .then(r=>r.json())
+    .then(setPlants)
+  },[])
+
 
   return (
     <div className="App">
       <Navbar usernames={usernames} user={user} setUser={setUser} openSignup={openSignup} setOpenSignup={setOpenSignup}/>
       <Routes>
-        <Route path="/plants" element={<Plants/>} />
+        <Route path="/plants" element={<Plants plants={plants}/>} />
+        <Route path="/plants/:plantName" element={<PlantPage/>} />
         <Route path="/community" element={<Community/>} />
         <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
