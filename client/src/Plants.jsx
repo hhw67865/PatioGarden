@@ -12,6 +12,7 @@ import PostCard from './PostCard';
 import FollowButton from './FollowButton';
 import PlantCard from './PlantCard';
 
+
 const Plants = ({plants}) => {
 
   const plantArray = plants.map((plant,i)=><PlantCard key={i} plant={plant}/>)

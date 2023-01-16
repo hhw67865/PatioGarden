@@ -1,7 +1,7 @@
 class PostTagsController < ApplicationController
-#    def index
-#      render json: PostTag.all, status: :ok
-#    end
+  #  def index
+  #    render json: PostTag.all, status: :ok
+  #  end
    
 #    def show
 #      render json: PostTag.find(params[:id]), status: :ok

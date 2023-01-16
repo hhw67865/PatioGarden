@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pins
   scope 'api' do
     resources :follows, only: :create
     resources :post_tags
