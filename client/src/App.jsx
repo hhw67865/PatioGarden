@@ -50,7 +50,7 @@ function App() {
       <Navbar usernames={usernames} user={user} setUser={setUser} openSignup={openSignup} setOpenSignup={setOpenSignup}/>
       <Routes>
         <Route path="/plants" element={<Plants plants={plants}/>} />
-        <Route path="/plants/:plantName" element={<PlantPage/>} />
+        <Route path="/plants/:plantName" element={<PlantPage userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user}/>} />
         <Route path="/community" element={<Community/>} />
         <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}

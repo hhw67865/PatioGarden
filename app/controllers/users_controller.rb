@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   end
    
    def create
-     render json: User.create!(model_params), status: :created
+     render json: User.create!(creation_params), status: :created
    end
    
    def update
@@ -28,6 +28,7 @@ class UsersController < ApplicationController
    
    def destroy
      User.find(session[:user_id]).destroy
+     session.delete :user_id
      head :no_content
    end
    
@@ -55,6 +56,10 @@ class UsersController < ApplicationController
    private
    
    def model_params
-     params.permit(:username, :name, :email, :description, :skill_level, :location_id)
+     params.permit(:username, :name, :email,:description, :skill_level, :location_id)
+   end
+   
+   def creation_params
+    params.permit(:username, :email, :password)
    end
 end

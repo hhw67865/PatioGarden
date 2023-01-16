@@ -8,6 +8,7 @@ import EmailModal from './EmailModal';
 import ProfileModal from './ProfileModal';
 import UsernameModal from './UsernameModal';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import DeleteAccountModal from './DeleteAccountModal';
 
 
 const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUsername}) => {
@@ -20,6 +21,7 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
   const [confirmPassword, setConfirmPassword] = useState("")
   const [errors, setErrors] = useState(null)
   const [success, setSuccess] = useState(false)
+  const [openDelete, setOpenDelete] = useState(false)
 
   
   useEffect(()=>{
@@ -135,6 +137,8 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
             {errors?errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start"}} className="errors" variant="body2" component="p">{error}</Typography>):null}
 
             </form>
+            <Button onClick={()=>setOpenDelete(true)} sx={{mt:'4rem'}} variant="outlined" color="error">Delete Account</Button>
+            <DeleteAccountModal setUser={setUser} openDelete={openDelete} setOpenDelete={setOpenDelete}/>
         </Box>
       </Container>
   )

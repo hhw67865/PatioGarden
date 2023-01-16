@@ -31,7 +31,7 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin, usernames}) => {
     }
 
     function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault()        
         if (confirmPassword!==formData.password) {
             setErrors(["Password confirmation does not match"])
             setTimeout(()=>setErrors(null),5000)

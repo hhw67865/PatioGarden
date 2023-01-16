@@ -20,8 +20,7 @@ const ProfileModal = ({openProfile, setOpenProfile, locations, user, setUserUpda
     const [errors, setErrors] = useState(null)
 
     function handleForm (e) {
-        setFormData({...formData,[e.target.name]:e.target.value})
-        console.log(formData)
+        setFormData({...formData,[e.target.name]:e.target.value})        
     }
 
     function submitForm (e) {

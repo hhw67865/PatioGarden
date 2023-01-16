@@ -64,11 +64,11 @@ const Comments = ({post, user,setUserUpdate, userUpdate}) => {
                 <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar></Avatar></Grid>
                 <Grid xs={11} sx={{display:'flex'}} >
                     <Paper sx={{minWidth:'50%', p:1}}>
-                        <div style={{display:'flex'}}>
+                        <div style={{display:'flex', gap:10}}>
                             <Typography sx={{flex:1}}>
                                 {comment.user.username}
                             </Typography>
-                            <Typography sx={{alignSelf:'end'}}>
+                            <Typography variant="caption" sx={{alignSelf:'end'}}>
                                 {comment.created_at_ago}
                             </Typography>
                         </div>

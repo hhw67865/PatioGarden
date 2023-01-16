@@ -17,13 +17,17 @@ Rails.application.routes.draw do
     resources :tags
     resources :problems
     resources :pests
-    resources :plants
+    resources :plants, only: :index do
+      resources :posts, only: :index
+    end
 
     get "/users/:username", to: 'users#show_user'
 
+    get "/plants/:name", to: 'plants#show_plant'
+
     patch "/users", to: 'users#update'
 
-    delete "users", to: 'users#destroy'
+    delete "/users", to: 'users#destroy'
 
     post '/login', to: "sessions#create"
 

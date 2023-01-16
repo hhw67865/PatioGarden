@@ -3,8 +3,18 @@ class PlantsController < ApplicationController
      render json: Plant.all, status: :ok
    end
    
-   def show
+   def show     
      render json: Plant.find(params[:id]), status: :ok
+   end
+
+   def show_plant
+    plant = Plant.where("name ilike ?", params[:name])
+    if plant.length > 0
+      render json: plant[0], status: :ok
+    else
+      render json: {error: "Plant name does not exist"}, status: :not_found
+    end
+
    end
    
 #    def create
