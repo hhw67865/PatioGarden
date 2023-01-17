@@ -22,8 +22,17 @@ class UsersController < ApplicationController
    
    def update
      instance = User.find(session[:user_id])
+    #  if params[:image]
+    #     instance.image.attach(params[:image])
+    #  end
      instance.update!(model_params)
      render json: instance, serializer: MainuserSerializer, status: :accepted
+   end
+
+   def image
+      instance = User.find(session[:user_id])
+      instance.image.attach(params[:image])
+      render json: instance
    end
    
    def destroy
@@ -57,6 +66,10 @@ class UsersController < ApplicationController
    
    def model_params
      params.permit(:username, :name, :email,:description, :skill_level, :location_id)
+   end
+
+   def image_params
+    params.require(:user).permit(:image)
    end
    
    def creation_params

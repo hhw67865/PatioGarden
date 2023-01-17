@@ -55,7 +55,7 @@ const Login = ({openLogin, setOpenLogin, setUser, setOpenSignup}) => {
             <Box className="modal-box" sx={{bgcolor: 'background.paper',boxShadow: 24}}>
                 <Typography className="modal-title" variant="h4" component="h4">
                     Welcome back.
-                </Typography>
+                </Typography>                
                 <form className="modal-form" onSubmit={handleSubmit}>
                     <Typography className="errors" variant="body2" component="p">
                         {errors?errors:<br/>}

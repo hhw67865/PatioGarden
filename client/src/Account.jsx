@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import { Typography } from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import {Button} from '@mui/material';
 import {TextField} from '@mui/material';
 import { useState, useEffect } from 'react';
@@ -9,6 +9,7 @@ import ProfileModal from './ProfileModal';
 import UsernameModal from './UsernameModal';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteAccountModal from './DeleteAccountModal';
+import { useRef } from 'react';
 
 
 const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUsername}) => {
@@ -23,6 +24,8 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
   const [success, setSuccess] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
 
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null)
+  
   
   useEffect(()=>{
     fetch(`/api/locations`)
@@ -60,14 +63,51 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
       })
   }
 
+  function handleProfilePicture (e) {
+    e.preventDefault()
+    console.log(e.target.image.files[0])
+    // const data = new FormData()
+    // data.append("image", e.target.image.files[0])
+    // fetch(`/api/users/image`, {
+    //     method: "PATCH",        
+    //     body: data
+    //     })
+    
+  }
+
+  const fileInputRef = useRef()
+  const handleClick = () => {
+    fileInputRef.current.click()
+  }
+
+  function handleImageChange (e) {
+    e.preventDefault()
+    let reader = new FileReader();
+    let file = e.target.files[0]
+
+    reader.onloadend = () => {
+        setImagePreviewUrl(reader.result);
+    }
+    reader.readAsDataURL(file)
+    
+  }
+
   
 
   return (
       <Container sx={{display:'flex', flexDirection:'column' ,alignItems:'center', height:'100vh',borderRight: "1px solid black", borderLeft: "1px solid black", width:'850px' }}>        
-        <Box sx={{ width: '750px',p:'10px'}}>
-            <Typography sx={{my:'3rem'}} className="account" variant="h2" component="h2">
-                Account
-            </Typography>        
+        <Box sx={{ width: '750px',p:'10px', mt:'2rem'}}>
+            <div style={{display: "flex", alignItems:'center'}}>
+                <Typography sx={{my:'3rem', flex:1}} className="account" variant="h2" component="h2">
+                    Account
+                </Typography>
+                <Avatar className="account-avatar" sx={{mr:'3rem', width:"200px", height: "200px"}} alt={user.username} src={imagePreviewUrl?imagePreviewUrl:user.image_url}></Avatar>
+            </div>
+            <form style={{display:"flex",justifyContent:"end",alignItems:'center', margin:"1rem"}} onSubmit={handleProfilePicture}>                
+                <input type='file' ref={fileInputRef} name="image" onChange={handleImageChange} style={{display: 'none'}}/>
+                {imagePreviewUrl?<Button variant="outlined" color="error" onClick={()=>setImagePreviewUrl(null)}>Cancel Changes</Button>:<Button variant="outlined" color="success" onClick={handleClick}>Update Picture</Button>}
+                <Button type="submit" variant='outlined' sx={{mr:"1rem", ml:"1rem"}} >Save</Button>
+            </form>        
             <Button onClick={()=>setOpenEmail(true)} className="account-info" sx={{textTransform:'none', textAlign:'start', width: '700px'}}>
                 <Typography sx={{alignSelf: "start", flex:'1'}} variant="body1" component="p">
                     Email address

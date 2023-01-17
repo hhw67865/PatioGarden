@@ -10,6 +10,12 @@ class User < ApplicationRecord
   has_many :following, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   # All the people the user is following
 
+  has_one_attached :image
+
+  def image_url
+    Rails.application.routes.url_helpers.url_for(image) if image.attached?
+  end
+
 
   
   validates :username, presence: true, uniqueness: { case_sensitive: false }, length: {minimum:4}

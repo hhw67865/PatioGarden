@@ -67,7 +67,7 @@ const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
                         <>
                             <Tooltip title="Open settings">
                                 <IconButton sx={{ p: 0 }} onClick={e=>setAnchorEl(e.currentTarget)}>
-                                    <Avatar alt="Remy Sharp" src="" />
+                                    <Avatar alt={user.username} src={user.image_url} />
                                 </IconButton>
                             </Tooltip>
                             <Menu

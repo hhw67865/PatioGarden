@@ -37,7 +37,7 @@ const Signup = ({openSignup, setOpenSignup, setOpenLogin, usernames}) => {
             setTimeout(()=>setErrors(null),5000)
             return
         }
-        fetch(`api/signup`, {
+        fetch(`/api/signup`, {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify(formData)

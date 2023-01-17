@@ -113,8 +113,8 @@ const Profile = ({user, setUserUpdate, userUpdate}) => {
         <Grid xs={5} className="profile-area-1" >
           <Typography sx={{pb:'30px'}}>
             {profileUser.username}
-          </Typography>
-          <Avatar sx={{ width: 200, height: 200 }}></Avatar>
+          </Typography>          
+          <Avatar alt={profileUser&&profileUser.name} src={profileUser&&profileUser.image_url} sx={{ width: 200, height: 200 }}></Avatar>
           {user&&user.id!==profileUser.id&&<FollowButton setUserUpdate={setUserUpdate} user={user} profileUser={profileUser}/>}
         </Grid>
         <Grid className="profile-area-2" xs={7} >

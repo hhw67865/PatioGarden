@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :pins
+  
   scope 'api' do
     resources :follows, only: :create
     resources :post_tags
@@ -18,9 +18,11 @@ Rails.application.routes.draw do
     resources :tags
     resources :problems
     resources :pests
-    resources :plants, only: :index do
+      resources :plants, only: :index do
       resources :posts, only: :index
     end
+
+    patch "/users/image", to: 'users#image'
 
     get "/users/:username", to: 'users#show_user'
 
