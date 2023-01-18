@@ -1,3 +1,3 @@
 class PestSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :preventatives
+  attributes :id, :name,:image_url, :description, :preventatives
 end

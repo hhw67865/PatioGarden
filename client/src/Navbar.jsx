@@ -55,7 +55,7 @@ const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
                                     alignItems:'center'
                                 }}>
                                 {/* <img src="../public/Logo.jpg" alt="Logo" style={{width:"100%", height:"35px"}}/> */}
-                                <Avatar sx={{width:"50px",mr:"1rem", height:"50px"}} src="../public/Logo.jpg" alt="Logo"></Avatar> PatioGarden
+                                <Avatar sx={{width:"50px",mr:"1rem", height:"50px"}} src="/Logo.jpg" alt="Logo"></Avatar> PatioGarden
                             </Typography>
                         </Button>
                         <Button onClick={()=>navigate("/plants")} sx={{ my: 2, color: 'white', display: 'block', letterSpacing: '.3rem' }}>

@@ -1,6 +1,6 @@
 import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';
 import {useEffect, useState} from 'react'
@@ -12,8 +12,16 @@ import IconButton from '@mui/material/IconButton';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PlantCard from './PlantCard';
+
 
 const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
+
+    let navigate = useNavigate();
+
+    function handleNavToUser () {
+      navigate(`/profile/${post.user.username}`)
+    }
 
     const [showComments, setShowComments] = useState(false)
 
@@ -49,18 +57,20 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
       .then(()=>setUserUpdate(prev=>!prev))
     }
 
+    
+
   return (
     <Paper className="post-card" sx={{my:"1rem"}}>
       <Grid container>
-        <Grid sx={{p:0,display:'flex',alignItems:'center'}} xs={2}><Avatar alt={post.user.username} src={post.user.image_url} sx={{ width: 56, height: 56, m: '1rem' }}></Avatar></Grid>
+        <Grid sx={{p:0,display:'flex',alignItems:'center'}} xs={2}><Avatar onClick={handleNavToUser} alt={post.user.username} src={post.user.image_url} sx={{ width: 56, height: 56, m: '1rem',cursor:'pointer' }}></Avatar></Grid>
         <Grid sx={{ p:1}} xs={7}>
-            <Typography>{post.user.username}</Typography>
+            <Typography onClick={handleNavToUser} sx={{cursor:'pointer'}}>{post.user.username} is growing {post.plant.name}</Typography>
             <Typography>{post.user.skill_level}</Typography>
             <Typography variant="caption">{post.created_at_ago}</Typography>
         </Grid>
-        <Grid sx={{p:1, display:'flex',flexDirection:"column", alignItems:'end', pr:"2rem" }} xs={3}>
-          <Typography>PLANT: {post.plant.name}</Typography>
+        <Grid sx={{p:1, display:'flex',flexDirection:"column", alignItems:'end', pr:"2rem" }} xs={3}>         
           {user&&user.id===post.user.id&&<IconButton onClick={handleDelete} ><DeleteIcon fontSize="inherit" /></IconButton>}
+          <Avatar src={post.plant.image_url}/>
         </Grid>
         <Grid sx={{p:1}} xs={12}>{post.tags.map((tag,i)=><Chip key={i} label={tag.name.toUpperCase()}/>)}</Grid>
         <Grid sx={{p:1}} xs={12}>{post.title}</Grid>
@@ -80,7 +90,7 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
         <Grid sx={{p:1}} xs={3}><Typography sx={{cursor:"pointer"}} onClick={()=>setShowComments(!showComments)}>{post.comments.length} {post.comments.length===1? "Comment":"Comments"}</Typography></Grid>
         <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}><Button>Like</Button></Grid>
         <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}><Button onClick={()=>setShowComments(!showComments)}>Comment</Button></Grid>
-        {showComments && <Grid sx={{p:0}} xs={12}><Comments userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} post={post}></Comments></Grid>}
+        {showComments && <Grid sx={{p:0}} xs={12}><Comments setShowComments={setShowComments} userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} post={post}></Comments></Grid>}
       </Grid>
     </Paper>
   );

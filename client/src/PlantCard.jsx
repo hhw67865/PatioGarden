@@ -12,7 +12,7 @@ const PlantCard = ({plant}) => {
     <Card onClick={()=>navigate(`/plants/${plant.name}`)} variant='outlined' elevation={0} sx={{ width: 150, border:"none", borderRadius:"0", cursor:'pointer' }}>
       <CardMedia
         sx={{ height: 120 }}
-        image="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Tomato.jpg/640px-Tomato.jpg"
+        image={plant.image_url}
         title="green iguana"
       />
       <CardContent sx={{p:0, textAlign:'center'}}>

@@ -1,3 +1,3 @@
 class ProblemSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :preventatives
+  attributes :id,:image_url, :name, :description, :preventatives
 end

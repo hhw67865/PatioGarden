@@ -147,7 +147,7 @@ const Profile = ({user, setUserUpdate, userUpdate}) => {
                 width: 150,
                 margin:"10px"
               }}>
-                <ImageSrc style={{background: "url(https://howtodrawforkids.com/wp-content/uploads/2022/01/how-to-draw-a-tomato.jpg) no-repeat center/contain" }} />
+                <ImageSrc style={{background: `url(${plant.image_url}) no-repeat center/cover` }} />
                 <ImageBackdrop className="MuiImageBackdrop-root" />
                 <Image>
                   <Typography

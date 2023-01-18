@@ -10,7 +10,9 @@ import Profile from './Profile';
 import Account from './Account';
 import NotFound from './NotFound';
 import PlantPage from './PlantPage';
-
+import CarePage from './CarePage';
+import ProblemPage from './ProblemPage';
+import PestPage from './PestPage';
 
 
 
@@ -54,9 +56,9 @@ function App() {
         <Route path="/plants" element={<Plants plants={plants}/>} />
         <Route path="/plants/:plantName">
           <Route index element={<PlantPage userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user}/>}/>          
-          <Route path="care" element={<div>Care</div>}/>
-          <Route path="problems" element={<div>Care</div>}/>
-          <Route path="pests" element={<div>Care</div>}/>
+          <Route path="care" element={<CarePage  userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user}/>}/>
+          <Route path="problems" element={<ProblemPage  userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user}/>}/>
+          <Route path="pests" element={<PestPage/>}/>
         </Route>
         <Route path="/community" element={<Community/>} />
         <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />

@@ -2,30 +2,70 @@ LOCATIONS = ["Alaska", "Alabama", "Arkansas", "American Samoa", "Arizona", "Cali
 MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 TAGS = ["care", "pests", "problems", "progress"]
 
+PROBLEMS = [
+  {
+    name: "Late blight",
+    image_url: "https://gardenerspath.com/wp-content/uploads/2021/07/Identify-and-Treat-Late-Blight-on-Tomatoes-FB.jpg",
+    description: "Late blight, caused by the fungus Phytophthora infestans, is a common disease of tomatoes that can cause leaves to turn brown and rot, and can also affect the fruit.",
+    preventatives: "To prevent late blight, you should use disease-resistant varieties, practice crop rotation, avoid overhead irrigation and keep the foliage dry, and remove and destroy infected plant debris. Also, it's important to monitor the weather forecast for high humidity and high temperatures, as these are favorable conditions for the fungus to spread. In addition, using fungicides can also help to prevent the disease."
+  },
+  {
+    name: "Powdery mildew",
+    image_url: "https://www.saferbrand.com/media/Articles/Safer-Brand/How-to-Treat-Powdery-Mildew.jpg",
+    description: "Powdery mildew, caused by the fungus Sphaerotheca fuliginea, is a common disease of cucumbers that can cause leaves to turn yellow and wilt, and can also affect the fruit.",
+    preventatives: "To prevent powdery mildew, you should use disease-resistant varieties, practice good cultural practices, such as proper spacing and good air circulation, and avoid overcrowding. Also, it's important to monitor the weather forecast for high humidity and high temperatures, as these are favorable conditions for the fungus to spread. In addition, using fungicides can also help to prevent the disease."
+  },
+  {
+    name: "Bacterial leaf spot",
+    image_url: "https://extension.wvu.edu/files/50d2bf3d-125f-4b45-9c03-487959bd8344/893x595?cb=0862b40bec913b574f1f05f79f2805c7",
+    description: "Bacterial leaf spot, caused by the bacterium Xanthomonas campestris, is a common disease of peppers that can cause leaves to turn yellow and brown, and can also affect the fruit.",
+    preventatives: "To prevent bacterial leaf spot, you should use disease-resistant varieties, practice good cultural practices, such as proper spacing and good air circulation, and avoid overcrowding. Also, it's important to monitor the weather forecast for high humidity and high temperatures, as these are favorable conditions for the bacteria to spread. In addition, using copper-based fungicides can also help to prevent the disease."
+  },
+  {
+    name: "Lack of water",
+    image_url: "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2021/6/17/0/shutterstock_Mironmax-Studio-1731743746.jpg.rend.hgtvcom.1280.853.suffix/1623948291978.jpeg",
+    description: "There are several signs that can indicate that a vegetable or plant is lacking water:\n
+    Wilting: The plant will appear droopy or limp, as if it is wilting. This is because the plant is not receiving enough water to maintain turgor pressure in its cells, which causes the plant to wilt.\n
+    Yellowing of leaves: When a plant is lacking water, the leaves will start to turn yellow and dry, this is a clear indication that the plant is not getting enough water.\n
+    Leaf drop: When a plant is stressed due to lack of water, it may shed some of its leaves as a survival mechanism.\n
+    Slow growth: If a plant is not getting enough water, it may have slowed or stunted growth.\n
+    Cracks in the soil: If the soil is very dry, it can become cracked, which can indicate that the plant is not getting enough water.\n
+    Check the moisture of the soil: To check if the soil is dry or not, you can stick your finger in the soil, if it's dry it's a sign that the plant needs water.",
+    preventatives: "When encountered with these signs, add more water. It's important to note that these signs can also be caused by other factors such as pests, diseases or environmental stress."
+  }
+]
+
+
+  
+
 PESTS = [
   {
     name: "Aphids",
+    image_url: "https://www.gardeners.com/globalassets/articles/gardening/hero_thumbnail/5168-aphids.jpg?$staticlink$", 
     description: "Aphids are small, sap-sucking insects that can cause damage to leaves, stems, and buds of plants. They can also spread plant viruses.",
     preventatives: "To prevent aphids, you can use companion planting, such as planting plants that attract beneficial insects, like ladybugs, lacewings, and parasitic wasps. You can also use organic pesticides, like neem oil or insecticidal soap, to control aphid populations. Another preventative methods include using reflective mulch or aluminum foil, or introducing natural predators like ladybugs and lacewings."
   },
   {
     name: "Whiteflies",
+    image_url: "https://www.almanac.com/sites/default/files/styles/large/public/image_nodes/whiteflies_d-kucharski-k-kucharska_ss.jpg?itok=oT1pzQd9",
     description: "Whiteflies are small, winged insects that feed on the sap of plants. They can cause wilting, yellowing, and leaf drop, and can also spread plant viruses.",
     preventatives: "To prevent whiteflies, you can use reflective mulch, which confuses and repels the whiteflies. You can also use sticky traps to trap the adult whiteflies and reduce their population. Another method is to use horticultural oil or insecticidal soap to smother the whiteflies. Also, you can introduce natural predators like parasitic wasps, lacewings and ladybugs to control the population."
   },
   {    
     name: "Cucumber beetles",
+    image_url: "https://www.planetnatural.com/wp-content/uploads/2022/05/striped-cucumber-beetle-1024x683.jpg",
     description: "Cucumber beetles are a common pest of cucumbers, melons, and squash. They can damage leaves, flowers, and fruit, and can also spread plant diseases.",
     preventatives: "To prevent cucumber beetles, you can use row covers to keep the beetles from getting to the plants. You can also use traps, such as yellow sticky traps or pheromone traps, to trap and reduce the population of adult beetles. Additionally, you can use organic pesticides, such as neem oil or insecticidal soap, to control the population. It's also important to keep your garden clean by removing debris and crop residues after harvest, and to rotate your crops to avoid planting cucurbit crops in the same spot each year."
   },
   {    
     name: "Colorado potato beetles",
+    image_url: "https://extension.umn.edu/sites/extension.umn.edu/files/colorado-potato-beetles-3.jpg",
     description: "These beetles are a common pest of potatoes, they can damage leaves, stems, and tubers of the plant. They are also known to spread plant diseases.",
     preventatives: "To prevent Colorado potato beetles, you can use row covers to keep the beetles from getting to the plants. You can also use traps, such as yellow sticky traps or pheromone traps, to trap and reduce the population of adult beetles. Additionally, you can use organic pesticides, such as neem oil or insecticidal soap, to control the population. It's also important to keep your garden clean by removing debris and crop residues after harvest, and to rotate your crops to avoid planting potatoes in the same spot each year."
   }
 ]
 
-# Aphids (all), Whiteflies (Tomatoes, cucumbers, peppers, squash), Cucumber Beetles (Cucumbers, melons, squash), Potato beetles (potatoes)
+# Aphids (all), Whiteflies (Tomatoes 1, cucumbers 2, peppers 3, squash 5), Cucumber Beetles (Cucumbers 2, melons 6, squash 5), Potato beetles (potatoes 9)
 
 PLANTS = [
   {
@@ -92,10 +132,10 @@ LOCATIONS.each{ |state| Location.create(name: state)}
 MONTHS.each{ |month| Month.create(name:month)}
 
 PLANTS.each{|plant| Plant.create(
-    name: plant.name,
-    image_url: plant.image_url,
-    description: plant.description,
-    care: plant.care
+    name: plant[:name],
+    image_url: plant[:image_url],
+    description: plant[:description],
+    care: plant[:care]
 )}
 
 # Tomatoes
@@ -390,36 +430,110 @@ Location.all.each{|location|
     }
 
 
-8.times do
-    Pest.create(
-        name: Faker::Creature::Animal.name,
-        description: "this is a description of the pest",
-        preventatives: "these are preventatives"
-        )
-end
+PESTS.each{|pest| Pest.create(
+    name: pest[:name],
+    image_url: pest[:image_url],
+    description: pest[:description],
+    preventatives: pest[:preventatives]
+)}
 
 
-8.times do |i|
-    Problem.create(
-        name: "Problem #{i+1}",
-        description: "this is a description of problem #{i+1}",
-        preventatives: "these are preventatives for problem #{i+1}"
-    )
-end
+PROBLEMS.each{|problem| Problem.create(
+    name: problem[:name],
+    image_url: problem[:image_url],
+    description: problem[:description],
+    preventatives: problem[:preventatives]
+)}
 
-2.times do
-    Plant.all.each{ |plant| PlantPest.create(
-        plant_id: plant.id,
-        pest_id: Pest.all.sample.id
-        )}
-end
+Plant.all.each{|plant| PlantPest.create(
+    plant_id: plant.id,
+    pest_id: 1
+)}
 
-2.times do
-    Plant.all.each{ |plant| PlantProblem.create(
-        plant_id: plant.id,
-        problem_id: Problem.all.sample.id
-        )}
-end
+PlantPest.create(
+    plant_id: 1,
+    pest_id: 2
+)
+
+PlantPest.create(
+    plant_id: 2,
+    pest_id: 2
+)
+
+PlantPest.create(
+    plant_id: 3,
+    pest_id: 2
+)
+
+PlantPest.create(
+    plant_id: 5,
+    pest_id: 2
+)
+
+PlantPest.create(
+    plant_id: 2,
+    pest_id: 3
+)
+
+PlantPest.create(
+    plant_id: 5,
+    pest_id: 3
+)
+
+PlantPest.create(
+    plant_id: 6,
+    pest_id: 3
+)
+
+PlantPest.create(
+    plant_id: 9,
+    pest_id: 4
+)
+
+# 1 Late Blight (Tomato 1/Potato 9)
+# 2 Powdery Mildew (2 cucumber, 4 lettuce, 6 watermelons, 3 peppers, 5 squash)
+# 3 Bacterial Leaf Spot (3 peppers)
+# 4 Lack of water (all)
+
+Plant.all.each{|plant| PlantProblem.create(
+    plant_id: plant.id,
+    problem_id: 4
+)}
+
+PlantProblem.create(
+    plant_id: 1,
+    problem_id: 1
+)
+PlantProblem.create(
+    plant_id: 9,
+    problem_id: 1
+)
+PlantProblem.create(
+    plant_id: 2,
+    problem_id: 2
+)
+PlantProblem.create(
+    plant_id: 4,
+    problem_id: 2
+)
+PlantProblem.create(
+    plant_id: 6,
+    problem_id: 2
+)
+PlantProblem.create(
+    plant_id: 3,
+    problem_id: 2
+)
+PlantProblem.create(
+    plant_id: 5,
+    problem_id: 2
+)
+PlantProblem.create(
+    plant_id: 3,
+    problem_id: 3
+)
+
+
 
 4.times do
     first_name = Faker::Name.first_name
