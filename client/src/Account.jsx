@@ -65,13 +65,17 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
 
   function handleProfilePicture (e) {
     e.preventDefault()
-    console.log(e.target.image.files[0])
-    // const data = new FormData()
-    // data.append("image", e.target.image.files[0])
-    // fetch(`/api/users/image`, {
-    //     method: "PATCH",        
-    //     body: data
-    //     })
+    // console.log(e.target.image.files[0])
+    const data = new FormData()
+    data.append("image", e.target.image.files[0])
+    fetch(`/api/users/image`, {
+        method: "PATCH",        
+        body: data
+        })
+        .then(()=>{
+          setImagePreviewUrl(null)
+          setUserUpdate(prev=>!prev)
+        })
     
   }
 
@@ -92,6 +96,7 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
     
   }
 
+  console.log(user)
   
 
   return (

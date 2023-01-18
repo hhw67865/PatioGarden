@@ -49,7 +49,7 @@ const Comments = ({post, user,setUserUpdate, userUpdate}) => {
   return (
     <>
         <Grid container spacing={2} sx={{p:2}}>
-            <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar></Avatar></Grid>
+            <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar alt={user.username} src={user.image_url}></Avatar></Grid>
             <Grid xs={11} >
                 <form onSubmit={handleNewComment} sx={{display:'flex'}}>
                     <TextField value={newComment} onChange={e=>setNewComment(e.target.value)} size='small' sx={{width:'85%'}} placeholder="Make a comment" variant="outlined" />
@@ -61,7 +61,7 @@ const Comments = ({post, user,setUserUpdate, userUpdate}) => {
     
         {comments.map((comment,i)=>
             <Grid key={i} container spacing={2} sx={{px:2,py:0}}>
-                <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar></Avatar></Grid>
+                <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar alt={comment.user.username} src={comment.user.image_url}></Avatar></Grid>
                 <Grid xs={11} sx={{display:'flex'}} >
                     <Paper sx={{minWidth:'50%', p:1}}>
                         <div style={{display:'flex', gap:10}}>

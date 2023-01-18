@@ -7,6 +7,8 @@ class UserSerializer < ActiveModel::Serializer
   has_many :following, serializer: FollowingSerializer
   has_many :plants
 
+
+
   
 
  

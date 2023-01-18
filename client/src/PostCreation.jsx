@@ -19,6 +19,7 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
   const [title, setTitle] = useState("")
   const [post, setPost] = useState("")
   const [errors, setErrors] = useState(null)
+  const [pictures, setPictures] = useState(null)
   
   
   useEffect(()=>{
@@ -29,27 +30,32 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
 
   function handleSubmit (e) {
     e.preventDefault()
-    
+
     if (formats.length===0) {
       setErrors(["Post must have at least one tag"])
       return
     }
 
-    const postObj = {
-      title: title,
-      post_body: post,
-      user_id: user.id,
-      plant_id: plant?plant.id:null
+    const data = new FormData()
+
+    if (pictures){
+    for (let i = 0; i < pictures.length; i++) {
+      data.append("pictures[]", pictures[i]);
     }
+    }
+    data.append("title", title)
+    data.append("post_body", post)
+    data.append("user_id", user.id)
+    data.append("plant_id", plant?plant.id:null)
 
     fetch(`/api/posts`, {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify(postObj)
+      method: "POST",
+      body: data
     })
     .then(r=>{
       if (r.ok) {
         r.json().then((newPost)=>{
+                    
           formats.forEach((tag)=>{
 
             fetch(`/api/post_tags`, {
@@ -64,6 +70,7 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
           setErrors(null)
           setTitle("")
           setPost("")
+          setPictures(null)
           setOpenCreation(false)
           setUserUpdate(prev=>!prev)
         })
@@ -87,7 +94,7 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
         <Typography variant="h5" component="h5" sx={{textAlign:"center",mb:4, fontWeight:"500"}}> Create Post </Typography>
         <hr/>
         <div style={{display:"flex", alignItems:'center', gap:"1rem", marginTop:10,marginBottom:30, width:'100%'}}>
-          <Avatar></Avatar>
+          <Avatar alt={user.username} src={user.image_url}></Avatar>
           <Typography sx={{flex:1}}>{user.username}</Typography>
           {plant&&<Chip sx={{alignSelf:'end, center', mr:"1rem"}} color="success" label={plant.name.toUpperCase()}/>}
         </div>
@@ -103,7 +110,8 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
             {tags.map((tag,i)=><ToggleButton key={i} value={tag.id}>{tag.name}</ToggleButton>)}
             
           </ToggleButtonGroup>
-          <TextField sx={{mt:"1rem"}} multiline rows={6} placeholder="What do you want to post?" value={post} onChange={(e)=>{setPost(e.target.value)}}/>
+          <input multiple type='file' name="pictures" onChange={(e)=>setPictures(e.target.files)}/>
+          <TextField sx={{my:"1rem"}} multiline rows={6} placeholder="What do you want to post?" value={post} onChange={(e)=>{setPost(e.target.value)}}/>
           <Button type="submit" variant='outlined'>Post</Button>
           {errors?errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start"}} className="errors" variant="body2" component="p"> {error}</Typography>):<br/>} 
         </form>

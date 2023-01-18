@@ -15,7 +15,13 @@ class PostsController < ApplicationController
    end
    
    def create
-     render json: Post.create!(model_params), status: :created
+    post = Post.create!(model_params)
+    if params[:pictures]
+      params[:pictures].each do |picture|
+        post.pictures.attach(picture)
+      end
+    end
+    render json: post, status: :created
    end
    
    def update
@@ -28,6 +34,7 @@ class PostsController < ApplicationController
      Post.find(params[:id]).destroy
      head :no_content
    end
+
    
    private
    

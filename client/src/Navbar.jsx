@@ -15,6 +15,7 @@ import {useNavigate} from 'react-router-dom';
 
 
 
+
 const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
 
     let navigate = useNavigate();
@@ -50,8 +51,11 @@ const Navbar = ({user, setUser,openSignup,setOpenSignup, usernames}) => {
                                     letterSpacing: '.3rem',
                                     color: 'inherit',
                                     textDecoration: 'none',
+                                    display:"flex",
+                                    alignItems:'center'
                                 }}>
-                                LOGO
+                                {/* <img src="../public/Logo.jpg" alt="Logo" style={{width:"100%", height:"35px"}}/> */}
+                                <Avatar sx={{width:"50px",mr:"1rem", height:"50px"}} src="../public/Logo.jpg" alt="Logo"></Avatar> PatioGarden
                             </Typography>
                         </Button>
                         <Button onClick={()=>navigate("/plants")} sx={{ my: 2, color: 'white', display: 'block', letterSpacing: '.3rem' }}>

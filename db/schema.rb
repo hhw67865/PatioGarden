@@ -83,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
 
   create_table "pests", force: :cascade do |t|
     t.string "name"
+    t.string "image_url"
     t.text "description"
     t.text "preventatives"
     t.datetime "created_at", null: false
@@ -120,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
 
   create_table "plants", force: :cascade do |t|
     t.string "name"
+    t.string "image_url"
     t.text "description"
     t.text "care"
     t.datetime "created_at", null: false
@@ -148,6 +150,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
 
   create_table "problems", force: :cascade do |t|
     t.string "name"
+    t.string "image_url"
     t.text "description"
     t.text "preventatives"
     t.datetime "created_at", null: false

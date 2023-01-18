@@ -67,10 +67,6 @@ class UsersController < ApplicationController
    def model_params
      params.permit(:username, :name, :email,:description, :skill_level, :location_id)
    end
-
-   def image_params
-    params.require(:user).permit(:image)
-   end
    
    def creation_params
     params.permit(:username, :email, :password)

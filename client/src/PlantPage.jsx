@@ -59,17 +59,17 @@ const PlantPage = ({userUpdate, setUserUpdate, user}) => {
             <Typography>{plant.locations.map((location)=>location.name)}</Typography>
         </Grid>
         <Grid xs={4} sx={{borderStyle:'solid', display:"flex", justifyContent:'center', alignItems:"center"}}>
-          <Button onClick={()=>navigate(`/plants/${plantName}/care`)} variant="contained" sx={{width:'100%', height:'100%'}}><FavoriteIcon sx={{mr:"1rem"}}/>Care</Button>
+          <Button onClick={()=>navigate(`/plants/${plantName}/care`)} variant="contained" sx={{width:'100%', height:'100%',p:"1rem"}}><FavoriteIcon sx={{mr:"1rem"}}/>Care</Button>
         </Grid>
         <Grid xs={4} sx={{borderStyle:'solid', display:"flex", justifyContent:'center', alignItems:"center"}}>
-          <Button onClick={()=>navigate(`/plants/${plantName}/problems`)} variant="contained" sx={{width:'100%', height:'100%'}}><ReportProblemIcon />Common Problems</Button>
+          <Button onClick={()=>navigate(`/plants/${plantName}/problems`)} variant="contained" sx={{width:'100%', height:'100%',p:"1rem"}}><ReportProblemIcon />Common Problems</Button>
         </Grid>
         <Grid xs={4} sx={{borderStyle:'solid', display:"flex", justifyContent:'center', alignItems:"center"}}>
-          <Button onClick={()=>navigate(`/plants/${plantName}/pests`)} variant="contained" sx={{width:'100%', height:'100%'}}><PestControlIcon sx={{mr:"1rem"}}/>Pests</Button>
+          <Button onClick={()=>navigate(`/plants/${plantName}/pests`)} variant="contained" sx={{width:'100%', height:'100%',p:"1rem"}}><PestControlIcon sx={{mr:"1rem"}}/>Pests</Button>
         </Grid>
         {user&&<Grid xs={12} sx={{borderStyle:'solid',display:'flex', justifyContent:'center',alignItems:"center" }}>
           <Box sx={{display:'flex', justifyContent:'center',alignItems:"center", gap:2, width:"80%"}}>
-            <Avatar></Avatar> <TextField sx={{flex:1}} onClick={()=>setOpenCreation(true)} placeholder={`Got something to share, ${user.username}?`}></TextField>
+            <Avatar alt={user.username} src={user.image_url}></Avatar> <TextField sx={{flex:1}} onClick={()=>setOpenCreation(true)} placeholder={`Got something to share, ${user.username}?`}></TextField>
             <PostCreation setUserUpdate={setUserUpdate} plant={plant} user={user} openCreation={openCreation} setOpenCreation={setOpenCreation}/>
           </Box>
         </Grid>}
