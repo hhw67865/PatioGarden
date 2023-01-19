@@ -9,6 +9,9 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {Avatar} from '@mui/material';
 import { Modal } from "@mui/material";
 import Chip from '@mui/material/Chip';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 
 const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant}) => {
@@ -20,6 +23,14 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
   const [post, setPost] = useState("")
   const [errors, setErrors] = useState(null)
   const [pictures, setPictures] = useState(null)
+  const [plants, setPlants] = useState(null)
+  const [plantSelect, setPlantSelect] = useState("")
+
+  useEffect(()=>{
+    fetch(`/api/plants`)
+    .then(r=>r.json())
+    .then(setPlants)
+  },[])
   
   
   useEffect(()=>{
@@ -30,6 +41,13 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
 
   function handleSubmit (e) {
     e.preventDefault()
+
+    if (!plant) {
+      if (plantSelect==="") {
+        setErrors(["Post must be for a plant"])
+        return
+      }
+    }
 
     if (formats.length===0) {
       setErrors(["Post must have at least one tag"])
@@ -46,7 +64,7 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
     data.append("title", title)
     data.append("post_body", post)
     data.append("user_id", user.id)
-    data.append("plant_id", plant?plant.id:null)
+    data.append("plant_id", plant?plant.id:plantSelect)
 
     fetch(`/api/posts`, {
       method: "POST",
@@ -96,7 +114,19 @@ const PostCreation = ({setUserUpdate, openCreation, setOpenCreation, user, plant
         <div style={{display:"flex", alignItems:'center', gap:"1rem", marginTop:10,marginBottom:30, width:'100%'}}>
           <Avatar alt={user.username} src={user.image_url}></Avatar>
           <Typography sx={{flex:1}}>{user.username}</Typography>
-          {plant&&<Chip sx={{alignSelf:'end, center', mr:"1rem"}} color="success" label={plant.name.toUpperCase()}/>}
+          {plant?<Chip sx={{alignSelf:'end, center', mr:"1rem"}} color="success" label={plant.name.toUpperCase()}/>:
+          <>
+            <InputLabel id="plant-label">Plant</InputLabel>
+            <Select  
+            labelId="plant-label"        
+            value={plantSelect}
+            sx={{minWidth:"8rem"}}
+            onChange={(e)=>setPlantSelect(e.target.value)}
+            >
+            {plants&&plants.map((p,i)=><MenuItem key={i} value={p.id}>{p.name}</MenuItem>)}          
+            </Select>
+          </>
+          }
         </div>
         <form onSubmit={handleSubmit} style={{display:'flex', flexDirection: 'column', gap:"1rem"}}>
           

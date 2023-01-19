@@ -60,7 +60,7 @@ function App() {
           <Route path="problems" element={<ProblemPage  userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user}/>}/>
           <Route path="pests" element={<PestPage/>}/>
         </Route>
-        <Route path="/community" element={<Community/>} />
+        <Route path="/community" element={<Community user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
         <Route path="/" element={<Home/>} />

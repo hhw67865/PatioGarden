@@ -48,15 +48,15 @@ const CarePage = ({userUpdate, setUserUpdate, user}) => {
       if (plant)
   return (
     
-    <Container sx={{p:'5rem',borderStyle:'solid', height:'100vh'}}>
-      <Grid container spacing={10} sx={{borderStyle:'solid', px:"2rem"}}>
-        <Grid xs={12} sx={{borderStyle:'solid', p:0}}>
+    <Container sx={{p:'5rem', height:'100vh'}}>
+      <Grid container spacing={10} sx={{ px:"2rem"}}>
+        <Grid xs={12} sx={{ p:0}}>
           <Button onClick={()=>navigate(`/plants/${plantName}`)}>Go back to {plantName}</Button>
         </Grid>
-        <Grid xs={5} sx={{borderStyle:'solid', p:0, pt:4}}>
+        <Grid xs={5} sx={{ p:0, pt:4}}>
             <img style={{objectFit:"cover", width:"100%"}}  src={plant.image_url} alt={plant.name} />
         </Grid>
-        <Grid xs={7} sx={{borderStyle:'solid'}}>
+        <Grid xs={7}>
             <Typography variant='h4' component='h4' sx={{fontWeight:"500", pb:"2rem"}}>{plant.name}</Typography>
             <Typography variant="h6" component='h6'>Description:</Typography>
             <Typography variant="body2" component='p' sx={{pb:"1rem"}}>{plant.description}</Typography>
@@ -65,11 +65,11 @@ const CarePage = ({userUpdate, setUserUpdate, user}) => {
             <Typography variant="h6" component='h6'>Growable Locations:</Typography>
             <Typography variant="body2" component='p' >{plant.locations.map((location)=>`${location.name} `)}</Typography>
         </Grid>
-        <Grid xs={12} sx={{borderStyle:'solid'}}>
+        <Grid xs={12}>
             <Typography variant='h4' component='h4' sx={{fontWeight:"500", pb:"2rem"}}>Care:</Typography>
             <Typography variant="body2" component='p' sx={{pb:"1rem"}}>{plant.care}</Typography>
         </Grid>
-        <Grid xs={12} sx={{borderStyle:'solid'}}>
+        <Grid xs={12}>
           <Typography variant='h4' component='h4' sx={{fontWeight:"500", pb:"2rem", textAlign:"center"}}>Care Posts</Typography> <hr/>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems:'center' }}>

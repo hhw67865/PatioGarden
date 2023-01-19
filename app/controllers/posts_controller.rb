@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     elsif params[:plant_id]
       render json: Plant.where("name ilike ?", params[:plant_id])[0].posts.order(created_at: :desc), status: :ok
     else
-     render json: Post.all, status: :ok
+     render json: Post.all.order(created_at: :desc), status: :ok
     end
    end
    

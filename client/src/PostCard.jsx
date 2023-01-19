@@ -25,7 +25,7 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
 
     const [showComments, setShowComments] = useState(false)
 
-    const [imageNumber, setImageNumber] = useState(1)
+    const [imageNumber, setImageNumber] = useState(0)
 
 
     function handleBefore () {
@@ -70,18 +70,18 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
         </Grid>
         <Grid sx={{p:1, display:'flex',flexDirection:"column", alignItems:'end', pr:"2rem" }} xs={3}>         
           {user&&user.id===post.user.id&&<IconButton onClick={handleDelete} ><DeleteIcon fontSize="inherit" /></IconButton>}
-          <Avatar src={post.plant.image_url}/>
+          <Avatar sx={{cursor:'pointer'}} onClick={()=>{navigate(`/plants/${post.plant.name}`)}} src={post.plant.image_url}/>
         </Grid>
         <Grid sx={{p:1}} xs={12}>{post.tags.map((tag,i)=><Chip key={i} label={tag.name.toUpperCase()}/>)}</Grid>
         <Grid sx={{p:1}} xs={12}>{post.title}</Grid>
         <Grid sx={{p:1, maxHeight: "350px", display:"flex", justifyContent:"center", alignItems:"center"}} xs={12}>
           {post.pictures&&
           <>
-            <IconButton onClick={handleBefore} size="small"><NavigateBeforeIcon/></IconButton>
+            {post.pictures.length>1&&<IconButton onClick={handleBefore} size="small"><NavigateBeforeIcon/></IconButton>}
             <div style={{flex:1, display:'flex',justifyContent:"center", alignItems:"center"}}>
               <img style={{objectFit:"cover", height:"300px", maxWidth:"85%"}} src={post.pictures[imageNumber]} alt={post.title} />
             </div>
-            <IconButton onClick={handleAfter} size="small"><NavigateNextIcon/></IconButton>
+            {post.pictures.length>1&&<IconButton onClick={handleAfter} size="small"><NavigateNextIcon/></IconButton>}
           </> 
           }
         </Grid>
