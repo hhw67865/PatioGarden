@@ -26,7 +26,7 @@ const Plants = ({plants}) => {
         </Grid>
         <Grid xs={9} sx={{borderStyle:"solid", height:'100vh'}}>
             <Box sx={{borderStyle:"solid", width:"100%", display:'flex'}}>
-              <Typography>Number of Plants avaliable</Typography>              
+              <Typography>{plantArray.length} plants to grow!</Typography>              
             </Box>
             <Box sx={{mt:3,gap:2, display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(150px,1fr))'}}>
               {plantArray}             

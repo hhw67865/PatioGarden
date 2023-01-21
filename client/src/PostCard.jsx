@@ -60,7 +60,7 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
     
 
   return (
-    <Paper className="post-card" sx={{my:"1rem"}}>
+    <Paper className="post-card" sx={{my:"1rem", py:"1rem"}}>
       <Grid container>
         <Grid sx={{p:0,display:'flex',alignItems:'center'}} xs={2}><Avatar onClick={handleNavToUser} alt={post.user.username} src={post.user.image_url} sx={{ width: 56, height: 56, m: '1rem',cursor:'pointer' }}></Avatar></Grid>
         <Grid sx={{ p:1}} xs={7}>

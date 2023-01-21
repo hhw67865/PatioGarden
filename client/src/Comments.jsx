@@ -51,7 +51,7 @@ const Comments = ({post, user,setUserUpdate, userUpdate, setShowComments}) => {
   }
   return (
     <>
-        <Grid container spacing={2} sx={{p:2}}>
+        {user&&<Grid container spacing={2} sx={{p:2}}>
             <Grid sx={{display:'flex',alignItems:'center', justifyContent:'center'}} xs={1}><Avatar alt={user.username} src={user.image_url}></Avatar></Grid>
             <Grid xs={11} >
                 <form onSubmit={handleNewComment} sx={{display:'flex'}}>
@@ -60,7 +60,7 @@ const Comments = ({post, user,setUserUpdate, userUpdate, setShowComments}) => {
                 </form>
             </Grid>
             {errors&&errors.map((error,i)=><Typography key={i} sx={{alignSelf:"start"}} className="errors" variant="body2" component="p">{error}</Typography>)}
-        </Grid>
+        </Grid>}
     
         {comments.map((comment,i)=>
             <Grid key={i} container spacing={2} sx={{px:2,py:0}}>
