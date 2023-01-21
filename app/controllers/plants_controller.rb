@@ -14,8 +14,13 @@ class PlantsController < ApplicationController
     else
       render json: {error: "Plant name does not exist"}, status: :not_found
     end
-
    end
+
+   def filtered
+      render json: PlantLocationMonth.all.where(["location_id = ? and month_id = ?",params[:location_id], params[:month_id]]).map{|p| p.plant}, status: :ok
+   end
+
+
    
 #    def create
 #      render json: Plant.create!(model_params), status: :created

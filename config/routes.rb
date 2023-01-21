@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
     get "/plants/:name", to: 'plants#show_plant'
 
+    post "/plants/filtered", to: 'plants#filtered'
+
     patch "/users", to: 'users#update'
 
     delete "/users", to: 'users#destroy'
