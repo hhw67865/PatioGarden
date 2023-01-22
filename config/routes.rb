@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   
+  
   scope 'api' do
     resources :follows, only: :create
     resources :post_tags
     resources :comments
+    resources :post_likes
     resources :posts do
       resources :comments, only: :index
     end
@@ -47,6 +49,10 @@ Rails.application.routes.draw do
     patch '/password/update', to: 'users#change_password'
 
     delete '/unfollow', to: 'follows#destroy'
+
+    delete '/unlike', to: 'post_likes#destroy'
+
+    get "/liked_posts", to: "posts#index_liked_posts"
 
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

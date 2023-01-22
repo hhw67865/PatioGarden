@@ -13,6 +13,9 @@ import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PlantCard from './PlantCard';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 
 
 const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
@@ -57,6 +60,31 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
       .then(()=>setUserUpdate(prev=>!prev))
     }
 
+    function handleLike() {
+      fetch(`/api/post_likes`, {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({post_id: post.id})
+        })
+        .then(r=>{
+          if (r.ok) {             
+            setUserUpdate(prev=>!prev)          
+          }          
+        })
+    }
+
+    function handleUnlike() {
+      fetch(`/api/unlike`,{
+        method: "DELETE",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({post_id: post.id})
+      })
+      .then(r=>{
+        if (r.ok) {          
+          setUserUpdate(prev=>!prev)             
+        } 
+      })
+    }
     
 
   return (
@@ -86,10 +114,38 @@ const PostCard = ({post, user, setUserUpdate, userUpdate}) => {
           }
         </Grid>
         <Grid sx={{p:1}} xs={12}>{post.post_body}</Grid>
-        <Grid sx={{p:1}} xs={9}>These people liked this post</Grid>
-        <Grid sx={{p:1}} xs={3}><Typography sx={{cursor:"pointer"}} onClick={()=>setShowComments(!showComments)}>{post.comments.length} {post.comments.length===1? "Comment":"Comments"}</Typography></Grid>
-        <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}><Button>Like</Button></Grid>
-        <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}><Button onClick={()=>setShowComments(!showComments)}>Comment</Button></Grid>
+        <Grid sx={{p:1, gap:1, display:"flex", justifyContent:"start", alignItems:"center", pl:"4rem"}} xs={6}>
+          <ThumbUpIcon/>
+          <Typography>{post.liked_users.length}</Typography>
+        </Grid>
+        <Grid sx={{p:1, display:"flex", justifyContent:"end", alignItems:"center",pr:"4rem"}} xs={6}>
+          <Typography sx={{cursor:"pointer"}} onClick={()=>setShowComments(!showComments)}>
+            {post.comments.length} {post.comments.length===1? "Comment":"Comments"}
+          </Typography>
+        </Grid>
+        {user&&
+        <>
+          <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}>
+            {user.liked_posts_id.includes(post.id)?
+            <Button onClick={handleUnlike} sx={{ display:"flex", justifyContent:"center", alignItems:"center", gap: 1}}>
+              <ThumbUpIcon/>
+              <Typography  sx={{fontWeight:"700"}}>Like</Typography>
+            </Button>
+            :
+            <Button onClick={handleLike} sx={{ display:"flex", justifyContent:"center", alignItems:"center", gap: 1}}>
+              <ThumbUpOffAltIcon/>
+              <Typography>Like</Typography>
+            </Button>
+            }
+          </Grid>
+          <Grid sx={{p:0, display:"flex", justifyContent:"center", alignItems:"center"}} xs={6}>
+            <Button sx={{ display:"flex", justifyContent:"center", alignItems:"center", gap: 1}} onClick={()=>setShowComments(!showComments)}>
+              <ChatBubbleOutlineIcon/>
+              <Typography>Comment</Typography>
+            </Button>
+          </Grid>
+        </>
+        }        
         {showComments && <Grid sx={{p:0}} xs={12}><Comments setShowComments={setShowComments} userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} post={post}></Comments></Grid>}
       </Grid>
     </Paper>

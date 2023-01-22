@@ -10,9 +10,10 @@ import UsernameModal from './UsernameModal';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteAccountModal from './DeleteAccountModal';
 import { useRef } from 'react';
+import PostCard from './PostCard';
 
 
-const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUsername}) => {
+const Account = ({usernames,user, setUser,userUpdate, setUserUpdate,setOpenUsername, openUsername}) => {
 
   const [openEmail,setOpenEmail] = useState(false)
   const [openProfile,setOpenProfile] = useState(false)
@@ -23,6 +24,7 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
   const [errors, setErrors] = useState(null)
   const [success, setSuccess] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
+  const [likedPosts, setLikedPosts] = useState([])
 
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null)
   
@@ -32,6 +34,12 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
     .then(r=>r.json())
     .then(setLocations)
   },[])
+
+  useEffect(()=>{
+    fetch(`/api/liked_posts`)
+    .then(r=>r.json())
+    .then(setLikedPosts)
+  },[userUpdate])
 
   function handlePasswordSubmit (e) {
       e.preventDefault()
@@ -95,12 +103,10 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
     reader.readAsDataURL(file)
     
   }
-
-  console.log(user)
   
 
   return (
-      <Container sx={{display:'flex', flexDirection:'column' ,alignItems:'center', height:'100vh',borderRight: "1px solid black", borderLeft: "1px solid black", width:'850px' }}>        
+      <Container sx={{display:'flex', flexDirection:'column' ,alignItems:'center', height:'100%',borderRight: "1px solid black", borderLeft: "1px solid black", width:'850px' }}>        
         <Box sx={{ width: '750px',p:'10px', mt:'2rem'}}>
             <div style={{display: "flex", alignItems:'center'}}>
                 <Typography sx={{my:'3rem', flex:1}} className="account" variant="h2" component="h2">
@@ -184,6 +190,13 @@ const Account = ({usernames,user, setUser, setUserUpdate,setOpenUsername, openUs
             </form>
             <Button onClick={()=>setOpenDelete(true)} sx={{mt:'4rem'}} variant="outlined" color="error">Delete Account</Button>
             <DeleteAccountModal setUser={setUser} openDelete={openDelete} setOpenDelete={setOpenDelete}/>
+            <Typography sx={{textTransform:'none', textAlign:'center', width: '700px', mb:'2rem', mt:'5rem'}} variant="h4" component="h4">
+                Liked Posts
+            </Typography>
+            <hr/>
+            <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems:'center' }}>
+              {likedPosts.map((post,i)=><PostCard key={i} userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} post={post}/>)}
+            </Box>
         </Box>
       </Container>
   )

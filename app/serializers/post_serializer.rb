@@ -9,6 +9,7 @@ class PostSerializer < ActiveModel::Serializer
   has_many :tags
   has_many :comments
   has_many :pictures
+  has_many :liked_users
 
 
   def created_at_ago

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_22_194742) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,6 +128,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "post_likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
+  end
+
   create_table "post_tags", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "tag_id", null: false
@@ -187,6 +196,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_16_211028) do
   add_foreign_key "plant_pests", "plants"
   add_foreign_key "plant_problems", "plants"
   add_foreign_key "plant_problems", "problems"
+  add_foreign_key "post_likes", "posts"
+  add_foreign_key "post_likes", "users"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
   add_foreign_key "posts", "plants"
