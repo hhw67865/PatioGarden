@@ -13,6 +13,14 @@ class User < ApplicationRecord
   has_many :received_messages, class_name: "Message", foreign_key: "receiver_id", dependent: :destroy
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id", dependent: :destroy
 
+  def contacts
+    
+    all_messages = self.received_messages.map{|message| message.sender} + self.sent_messages.map{|message| message.receiver}
+    all_messages.uniq
+  end
+
+
+
 
   has_many :post_likes, dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post

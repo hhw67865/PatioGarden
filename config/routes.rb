@@ -60,6 +60,10 @@ Rails.application.routes.draw do
 
     post "/get_conversation", to: "messages#get_conversation"
 
+    get "/user/contacts", to: "users#contacts"
+
+    get "/search_users/:input", to: "users#search"
+
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

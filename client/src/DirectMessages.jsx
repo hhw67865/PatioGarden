@@ -18,42 +18,52 @@ import PestControlIcon from '@mui/icons-material/PestControl';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import ChatBox from './ChatBox';
+import ContactCard from './ContactCard';
+import CreateMessageModal from './CreateMessageModal';
 
 
 const DirectMessages = ({user}) => {
 
+  let navigate = useNavigate()
+
+    
+    const [contacts, setContacts] = useState([])
     const [receiver, setReceiver] = useState(null)
+    const [chatMessages, setChatMessages] = useState([])
+    const [openCompose,setOpenCompose] = useState(false)
 
     useEffect(()=>{
-        fetch(`/api/users/steviehackett`)
+        fetch(`/api/user/contacts`)
         .then(r=>r.json())
-        .then(setReceiver)
+        .then(setContacts)
     },[])
     
 
+    const contactsArray = contacts.map((contact,i)=><ContactCard key={i} contacts={contacts} receiver={receiver} contact={contact} user={user} setChatMessages={setChatMessages} setReceiver={setReceiver} />)
+    
+
   return (
-    <Container sx={{borderStyle: 'solid', p:'5rem', height:'100vh'}}>
-      <Grid container spacing={10} sx={{borderStyle: 'solid', px:"2rem"}}>
-            <Grid xs={4} sx={{borderStyle: 'solid', display: "flex"}}>
-                <Typography>Username</Typography>
-                <AddIcon/>
+    <Container sx={{ p:'5rem', height:'100vh', mb:'5rem'}}>
+      <Grid container spacing={10} sx={{px:"2rem"}}>
+            <Grid xs={5} sx={{borderStyle: 'solid', display: "flex",justifyContent:'center', alignItems:'center', p:1}}>
+                <Typography variant='h6' component='h6' sx={{flex:1, textAlign:'center', pl:"2rem"}}>{user.username}</Typography>
+                <AddIcon onClick={()=>setOpenCompose(true)} sx={{cursor:"pointer",fontSize:'2rem', justifySelf:'end'}}/>
             </Grid>
-            <Grid xs={8} sx={{borderStyle: 'solid'}}>
-                <Typography>Other user</Typography>
+            <Grid xs={7} sx={{borderStyle: 'solid',p:0}}>
+                {receiver&&
+                <Box sx={{p:1,pl:3, display:'flex', gap:2, alignItems:'center', cursor: 'pointer'}} onClick={()=>navigate(`/profile/${receiver.username}`)}>
+                  <Avatar src={receiver.image_url} alt={receiver.username}></Avatar>
+                  <Typography variant='h6' component='h6'>{receiver.username}</Typography>
+                </Box>}
             </Grid>
-            <Grid xs={4} sx={{borderStyle: 'solid', display: "flex", flexDirection:'column'}}>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
-                <Typography>List of users</Typography>
+            <Grid xs={5} sx={{borderStyle: 'solid', display: "flex", flexDirection:'column',overflowY:"scroll"}}>
+                {contactsArray}
             </Grid>
-            <Grid xs={8} sx={{borderStyle: 'solid'}}>                
-                {receiver&&<ChatBox user={user} receiver={receiver}/>}            
+            <Grid xs={7} sx={{borderStyle: 'solid'}}>                
+                {receiver?<ChatBox user={user} receiver={receiver} messages={chatMessages}/>: <Typography>Start a Message</Typography>}       
             </Grid>
       </Grid>
+      <CreateMessageModal setReceiver={setReceiver} contacts={contacts} setContacts={setContacts} openCompose={openCompose} setOpenCompose={setOpenCompose}/>
     </Container>
   );
 }

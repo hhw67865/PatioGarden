@@ -17,70 +17,13 @@ import ReportProblemIcon from '@mui/icons-material/ReportProblem';
 import PestControlIcon from '@mui/icons-material/PestControl';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
+import SendIcon from '@mui/icons-material/Send';
 
 
-const ChatBox = ({user, receiver}) => {
-
-    const [messages, setMessages] = useState([])
-    const [ws,setWs] = useState(null)
+const ChatBox = ({user,receiver, messages}) => {
+    
     const [inputMessage, setInputMessage] = useState("")
 
-    useEffect(()=>{
-        fetch(`/api/get_conversation`,{
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({receiver_username:receiver.username, sender_username: user.username})
-        })
-        .then(r=>r.json())
-        .then(setMessages)
-    },[])
-
-    useEffect(()=> {
-        setWs(new WebSocket('ws://localhost:3000/api/cable'))
-    },[])
-
-    useEffect(()=> {
-        if (ws) {
-            ws.onopen = (event) => {
-              console.log('WebSocket connection opened', event);
-              
-              ws.send(JSON.stringify({
-                command: 'subscribe',
-                identifier: JSON.stringify({
-                    sender_username: user.username,
-                    receiver_username: receiver.username,
-                    channel: 'MessageChannel'
-                })
-              }))
-            }
-
-            ws.onmessage = (event) => {
-                const data = JSON.parse(event.data);
-                if (data.type === "ping") return
-                if (data.type === "welcome") return
-                if (data.type === "confirm_subscription") return
-
-                const message = data.message
-
-                console.log('WebSocket message received', event);
-                console.log(message)
-                setMessages(prev=>[message, ...prev])
-                // handle message here
-            };
-
-            ws.onclose = (event) => {
-                console.log('WebSocket connection closed', event);
-            };
-
-
-        }
-        return () => {
-            if (ws) {
-                ws.close();
-            }
-        }
-        
-    }, [ws])
 
     function handleNewMessage (e) {
         e.preventDefault()
@@ -95,23 +38,29 @@ const ChatBox = ({user, receiver}) => {
 
     const messagesArray = messages.map((message,i)=>{
         if (message.sender.username===user.username) {
-            return <Typography key={i} sx={{alignSelf:'end'}}>{message.body}</Typography>
+            return <Typography className="message" key={i} sx={{alignSelf:'end', backgroundColor: '#ADD8E6',mr:2, ml:5, my:.5}}>{message.body}</Typography>
         }
         else {
-            return <Typography key={i} sx={{alignSelf:'start'}}>{message.body}</Typography>
+            return <Typography className="message" key={i} sx={{alignSelf:'start', backgroundColor: '#f1f0f0', ml:2, mr:5, my:.5}}>{message.body}</Typography>
         }
-        
     })
 
 
   return (
     <>
-    <Box sx={{borderStyle: 'solid', height:500, display:"flex", flexDirection:"column-reverse", overflowY:"scroll"}}>
-            {messagesArray}
+    <Box sx={{height:400, display:"flex", flexDirection:"column-reverse", overflowY:"scroll"}}>
+        {messagesArray}
     </Box>
-    <Box>
+    <Box sx={{p:2}}>
         <form onSubmit={handleNewMessage}>
-            <TextField value={inputMessage} onChange={(e)=>setInputMessage(e.target.value)}/><Button type="submit">Send</Button>
+            <Grid container sx={{p:0,mt:3}}>
+                <Grid xs sx={{p:0, ml:4}}>
+                    <TextField size='small' sx={{width:'100%'}} value={inputMessage} onChange={(e)=>setInputMessage(e.target.value)}/>
+                </Grid> 
+                <Grid xs="auto" sx={{p:0}}>
+                    <Button type="submit"><SendIcon/></Button>    
+                </Grid>                
+            </Grid>
         </form>
     </Box>
     </>

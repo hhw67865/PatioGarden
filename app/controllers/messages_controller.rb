@@ -3,6 +3,7 @@ def index
   render json: Message.all, status: :ok
 end
 
+
 def show
   render json: Message.find(params[:id]), status: :ok
 end

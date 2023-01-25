@@ -62,6 +62,14 @@ class UsersController < ApplicationController
 
    end
 
+   def contacts
+    render json: User.find(session[:user_id]).contacts, status: :ok
+   end
+
+   def search
+    render json: User.all.where("username ILIKE ?", "#{params[:input]}%"), status: :ok
+   end
+
    private
    
    def model_params
