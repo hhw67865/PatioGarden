@@ -13,6 +13,8 @@ import PlantPage from './PlantPage';
 import CarePage from './CarePage';
 import ProblemPage from './ProblemPage';
 import PestPage from './PestPage';
+import MessageButton from './MessageButton';
+import DirectMessages from './DirectMessages';
 
 
 
@@ -63,9 +65,11 @@ function App() {
         <Route path="/community" element={<Community user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         <Route path="/profile/:username" element={<Profile user={user} userUpdate={userUpdate} setUserUpdate={setUserUpdate}/>} />
         {user?<Route path="/account" element={<Account usernames={usernames} setOpenUsername={setOpenUsername} openUsername={openUsername} userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} setUser={setUser}/>} />:null}
+        {user&&<Route path='/directmessages' element={<DirectMessages user={user}/>}/>}
         <Route path="/" element={<Home/>} />
         <Route path="*" element={<NotFound/>}/>
       </Routes>
+      <MessageButton/>
     </div>
   )
 }

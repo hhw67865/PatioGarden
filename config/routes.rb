@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   
   
+  
   scope 'api' do
+    mount ActionCable.server => "/cable"
+
+    resources :messages
     resources :follows, only: :create
     resources :post_tags
     resources :comments
@@ -53,6 +57,8 @@ Rails.application.routes.draw do
     delete '/unlike', to: 'post_likes#destroy'
 
     get "/liked_posts", to: "posts#index_liked_posts"
+
+    post "/get_conversation", to: "messages#get_conversation"
 
   end
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
