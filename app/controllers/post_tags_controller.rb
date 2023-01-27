@@ -1,4 +1,6 @@
 class PostTagsController < ApplicationController
+
+
   #  def index
   #    render json: PostTag.all, status: :ok
   #  end
@@ -17,10 +19,10 @@ class PostTagsController < ApplicationController
 #      render json: instance, status: :accepted
 #    end
    
-   def destroy
-     PostTag.find(params[:id]).destroy
-     head :no_content
-   end
+  #  def destroy
+  #    PostTag.find(params[:id]).destroy
+  #    head :no_content
+  #  end
    
    private
    

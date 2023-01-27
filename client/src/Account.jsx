@@ -65,6 +65,9 @@ const Account = ({usernames,user, setUser,userUpdate, setUserUpdate,setOpenUsern
         else {
           r.json().then((obj)=>{
             setErrors(obj.errors)
+            setOldPassword("")
+            setNewPassword("")
+            setConfirmPassword("")
             setTimeout(()=>setErrors(null),10000)
           })
         }

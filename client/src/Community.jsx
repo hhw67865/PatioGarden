@@ -51,7 +51,7 @@ const Community = ({user, userUpdate, setUserUpdate}) => {
         </Grid>}
         <Grid xs={12} >
         <Typography variant='h4' component='h4' sx={{fontWeight:"500", pb:"2rem", textAlign:"center"}}>Most Recent Posts</Typography> <hr/>
-          {user&&<FormControlLabel control={<Checkbox checked={showFollow} onChange={(e)=>setShowFollow(e.target.checked)} />} label="Show only people I follow" />}
+          {user&&<FormControlLabel control={<Checkbox checked={showFollow} onChange={(e)=>{setShowFollow(e.target.checked);setUserUpdate(prev=>!prev)}} />} label="Show only people I follow" />}
           <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%', alignItems:'center' }}>
             {filteredPosts.map((post,i)=><PostCard key={i} userUpdate={userUpdate} setUserUpdate={setUserUpdate} user={user} post={post}/>)}
           </Box>

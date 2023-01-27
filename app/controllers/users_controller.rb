@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
-   def index
-     render json: User.all, status: :ok
-   end
+
+  skip_before_action :authorize, only: [:show_user, :create, :usernames]
+
+  #  def index
+  #    render json: User.all, status: :ok
+  #  end
    
    def show
     user = User.find_by(id: session[:user_id])

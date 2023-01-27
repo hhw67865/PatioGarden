@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+    skip_before_action :authorize, only: [:create]
+
     def create
         user = User.where("username ilike ?", params[:username])
         

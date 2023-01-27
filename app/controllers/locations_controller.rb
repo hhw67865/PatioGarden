@@ -1,4 +1,7 @@
 class LocationsController < ApplicationController
+  skip_before_action :authorize, only: [:index, :show]
+
+
    def index
      render json: Location.all, status: :ok
    end

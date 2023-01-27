@@ -36,7 +36,7 @@ const ContactCard = ({contact, user, setChatMessages, setReceiver, receiver, con
                     sender_username: user.username,
                     receiver_username: contact.username,
                     channel: 'MessageChannel'
-                })
+                })                
               }))
             }
 

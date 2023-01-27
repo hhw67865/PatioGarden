@@ -1,4 +1,6 @@
 class FollowsController < ApplicationController
+
+
 #    def index
 #      render json: Follow.all, status: :ok
 #    end

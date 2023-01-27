@@ -20,8 +20,6 @@ class User < ApplicationRecord
   end
 
 
-
-
   has_many :post_likes, dependent: :destroy
   has_many :liked_posts, through: :post_likes, source: :post
 

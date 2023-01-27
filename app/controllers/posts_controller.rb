@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+
+  skip_before_action :authorize, only: [:index,:show]
+
+
    def index
     if params[:user_id]
       render json: User.find_by!(username: params[:user_id]).posts.order(created_at: :desc), status: :ok
@@ -24,16 +28,16 @@ class PostsController < ApplicationController
     render json: post, status: :created
    end
    
-   def update
-     instance = Post.find(params[:id])
-     instance.update!(model_params)
-     render json: instance, status: :accepted
-   end
+  #  def update
+  #    instance = Post.find(params[:id])
+  #    instance.update!(model_params)
+  #    render json: instance, status: :accepted
+  #  end
    
-   def destroy
-     Post.find(params[:id]).destroy
-     head :no_content
-   end
+  #  def destroy
+  #    Post.find(params[:id]).destroy
+  #    head :no_content
+  #  end
 
    def index_liked_posts
      render json: User.find(session[:user_id]).liked_posts, status: :ok
