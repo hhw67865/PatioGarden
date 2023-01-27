@@ -55,6 +55,7 @@ Project features:
 
 - Ruby 2.7.4
 - Rails version: 7.0.4
+- Postgresql Database
 - bcrypt
 - active_model_serializers
 - Active Storage: image_processing 1.2
