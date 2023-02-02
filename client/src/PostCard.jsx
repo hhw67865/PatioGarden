@@ -1,9 +1,8 @@
-import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import {Button} from '@mui/material';
 import Comments from './Comments';
 import Paper from '@mui/material/Paper';
@@ -12,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PlantCard from './PlantCard';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';

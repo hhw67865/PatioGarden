@@ -76,7 +76,6 @@ const Account = ({usernames,user, setUser,userUpdate, setUserUpdate,setOpenUsern
 
   function handleProfilePicture (e) {
     e.preventDefault()
-    // console.log(e.target.image.files[0])
     const data = new FormData()
     data.append("image", e.target.image.files[0])
     fetch(`/api/users/image`, {

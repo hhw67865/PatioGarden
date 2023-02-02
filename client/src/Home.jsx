@@ -1,20 +1,10 @@
 import Container from '@mui/material/Container';
 import { Typography } from '@mui/material';
-import { useParams } from 'react-router-dom'
 import Grid from '@mui/material/Unstable_Grid2';
-import Avatar from '@mui/material/Avatar';
 import {useEffect, useState} from 'react'
 import {Button} from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
-import PostCard from './PostCard';
-import FollowButton from './FollowButton';
-import PostCreation from './PostCreation';
 import {TextField} from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import PestControlIcon from '@mui/icons-material/PestControl';
 import { useNavigate } from 'react-router-dom';
 import {Autocomplete} from '@mui/material';
 import {MenuItem} from '@mui/material';
@@ -72,7 +62,7 @@ const Home = () => {
       <Grid container spacing={10} sx={{ px:"2rem"}}>
         <Grid xs={12} sx={{display:'flex', justifyContent:'center', alignItems:"center"}}>
           <img src="/Logo.png" alt="Logo" style={{width:"13rem", }} />
-          <Typography sx={{flexShrink:0, fontWeight: 700,fontFamily: "open-sans", fontSize:"3rem", letterSpacing: '.3rem',}}>Welcome to PatioGarden</Typography>
+          <Typography sx={{flexShrink:0, fontWeight: 700,fontFamily: "open-sans", fontSize:"3rem", letterSpacing: '.3rem'}}>Welcome to PatioGarden</Typography>
         </Grid>
         <Grid xs={12} sx={{flexDirection:"column",flex:1, display:'flex', justifyContent:'center', alignItems:"center"}}>
           <Button onClick={()=>navigate("/plants")} variant='outlined'><Typography sx={{fontWeight: 700,fontFamily: "open-sans", fontSize:"2rem"}}>Search for a Plant!</Typography></Button>

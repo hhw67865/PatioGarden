@@ -1,6 +1,5 @@
 class PostLikesController < ApplicationController
 
-
 def create
     render json: PostLike.create!(user_id: session[:user_id], post_id: params[:post_id]), status: :created
 end

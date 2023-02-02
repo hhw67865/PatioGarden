@@ -28,8 +28,6 @@ const ContactCard = ({contact, user, setChatMessages, setReceiver, receiver, con
     useEffect(()=> {
         if (ws) {
             ws.onopen = (event) => {
-            //   console.log('WebSocket connection opened', event);
-              
               ws.send(JSON.stringify({
                 command: 'subscribe',
                 identifier: JSON.stringify({
@@ -39,26 +37,15 @@ const ContactCard = ({contact, user, setChatMessages, setReceiver, receiver, con
                 })                
               }))
             }
-
             ws.onmessage = (event) => {
                 const data = JSON.parse(event.data);
                 if (data.type === "ping") return
                 if (data.type === "welcome") return
                 if (data.type === "confirm_subscription") return
-
                 const message = data.message
-
-                // console.log('WebSocket message received', event);
-                // console.log(message)
                 setMessages(prev=>[message, ...prev])
                 
             };
-
-            ws.onclose = (event) => {
-                // console.log('WebSocket connection closed', event);
-            };
-
-
         }
         return () => {
             if (ws) {

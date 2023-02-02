@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
 
   skip_before_action :authorize, only: [:show_user, :create, :usernames]
-
-  #  def index
-  #    render json: User.all, status: :ok
-  #  end
    
    def show
     user = User.find_by(id: session[:user_id])
@@ -25,9 +21,6 @@ class UsersController < ApplicationController
    
    def update
      instance = User.find(session[:user_id])
-    #  if params[:image]
-    #     instance.image.attach(params[:image])
-    #  end
      instance.update!(model_params)
      render json: instance, serializer: MainuserSerializer, status: :accepted
    end

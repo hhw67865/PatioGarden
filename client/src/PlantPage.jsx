@@ -5,11 +5,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Avatar from '@mui/material/Avatar';
 import {useEffect, useState} from 'react'
 import {Button} from '@mui/material';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
 import PostCard from './PostCard';
-import FollowButton from './FollowButton';
 import PostCreation from './PostCreation';
 import {TextField} from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';

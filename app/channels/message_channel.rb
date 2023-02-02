@@ -3,7 +3,6 @@ class MessageChannel < ApplicationCable::Channel
     
     
     conversation = create_conversation(params[:sender_username].downcase, params[:receiver_username].downcase)
-    # byebug
     stream_from "#{conversation}"
   end
 

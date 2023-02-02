@@ -9,19 +9,9 @@ def index
   end
 end
 
-# def show
-#   render json: Comment.find(params[:id]), status: :ok
-# end
-
 def create
   render json: Comment.create!(model_params), status: :created
 end
-
-# def update
-#   instance = Comment.find(params[:id])
-#   instance.update!(model_params)
-#   render json: instance, status: :accepted
-# end
 
 def destroy
   Comment.find(params[:id]).destroy

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   
-  
-  
   scope 'api' do
     mount ActionCable.server => "/cable"
 
@@ -15,10 +13,7 @@ Rails.application.routes.draw do
     end
     resources :users, except: [:show,:update,:destroy] do
       resources :posts, only: :index
-    end
-    resources :plant_location_months
-    resources :plant_problems
-    resources :plant_pests
+    end    
     resources :months
     resources :locations
     resources :tags
@@ -28,46 +23,31 @@ Rails.application.routes.draw do
       resources :posts, only: :index
     end
 
-    patch "/users/image", to: 'users#image'
-
     get "/users/:username", to: 'users#show_user'
-
+    get "/usernames", to: 'users#usernames'
+    get "/authorized", to: "users#show"
+    get "/user/contacts", to: "users#contacts"
+    get "/search_users/:input", to: "users#search"
+    post '/signup', to: "users#create"
+    patch "/users/image", to: 'users#image'
+    patch "/users", to: 'users#update'
+    patch '/password/update', to: 'users#change_password'
+    delete "/users", to: 'users#destroy'
+    
     get "/plants/:name", to: 'plants#show_plant'
-
     post "/plants/filtered", to: 'plants#filtered'
 
-    patch "/users", to: 'users#update'
-
-    delete "/users", to: 'users#destroy'
-
     post '/login', to: "sessions#create"
-
-    get "/authorized", to: "users#show"
-  
     delete "/logout", to: "sessions#destroy"
-  
-    post '/signup', to: "users#create"
-
-    get "/usernames", to: 'users#usernames'
-
-    patch '/password/update', to: 'users#change_password'
 
     delete '/unfollow', to: 'follows#destroy'
-
+  
     delete '/unlike', to: 'post_likes#destroy'
-
+  
     get "/liked_posts", to: "posts#index_liked_posts"
 
     post "/get_conversation", to: "messages#get_conversation"
 
-    get "/user/contacts", to: "users#contacts"
-
-    get "/search_users/:input", to: "users#search"
-
   end
-    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 
 end

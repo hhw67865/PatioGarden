@@ -27,17 +27,6 @@ class PostsController < ApplicationController
     end
     render json: post, status: :created
    end
-   
-  #  def update
-  #    instance = Post.find(params[:id])
-  #    instance.update!(model_params)
-  #    render json: instance, status: :accepted
-  #  end
-   
-  #  def destroy
-  #    Post.find(params[:id]).destroy
-  #    head :no_content
-  #  end
 
    def index_liked_posts
      render json: User.find(session[:user_id]).liked_posts, status: :ok
