@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :posts, only: :index
     end
 
+    
     get "/users/:username", to: 'users#show_user'
     get "/usernames", to: 'users#usernames'
     get "/authorized", to: "users#show"
