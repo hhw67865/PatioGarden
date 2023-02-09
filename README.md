@@ -31,6 +31,9 @@ As a user, you should be able to:
 - Follow and unfollow others.
 - Direct Message other users. Websockets are used to create a responsive experience.
 
+
+https://excalidraw.com/#json=zrqXD0fU2K88EDcaBtMTz,G5y_gXzP2ssXiUQUUorxQA
+
 ___________________________________________________________
 
 How to start the application:

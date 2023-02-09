@@ -11,8 +11,7 @@ class PostsController < ApplicationController
     else
      render json: Post.all.order(created_at: :desc), status: :ok
     end
-   end
-   
+   end   
    
    def show
      render json: Post.find(params[:id]), status: :ok
