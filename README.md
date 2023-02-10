@@ -48,6 +48,12 @@ How to start the application:
     cd client
     npm run dev
 
+
+(Coming soon)
+4. Start Native client:
+    cd native
+    expo start --tunnel
+
 ___________________________________________________________
 
 Project features:

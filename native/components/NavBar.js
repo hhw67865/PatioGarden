@@ -1,16 +1,38 @@
 import React from 'react';
 import {View,Text, StyleSheet, SafeAreaView} from 'react-native';
+import { Icon } from '@rneui/themed';
+import { COLORS } from '../constants/theme';
 
 
 const NavBar = () => {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{
+            borderTopWidth: 0.5,
+            borderColor: 'black',
+            }}>
             
             <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>My App</Text>
-                <Text style={styles.headerText}>My App</Text>
-                <Text style={styles.headerText}>My App</Text>
-                <Text style={styles.headerText}>My App</Text>
+                <Icon
+                    name='home-outline'
+                    type='ionicon'
+                    color={COLORS.secondary}
+                />
+                <Icon
+                    name='people-outline'
+                    type='ionicon'
+                    color={COLORS.tertiary}
+                />
+                <Icon
+                    name='leaf-outline'
+                    type='ionicon'
+                    color={COLORS.tertiary}
+                />
+                <Icon
+                    name='person-outline'
+                    type='ionicon'
+                    color={COLORS.tertiary}
+                />
+                
             </View>
             
         </SafeAreaView>

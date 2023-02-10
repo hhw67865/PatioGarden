@@ -1,13 +1,8 @@
-import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 
-
-import Home from "./screens/Home";
-import Details from "./screens/Details";
-import NavBar from "./components/NavBar";
-
-const Stack = createStackNavigator()
+import StackNavigator from "./StackNavigator";
+import { UserProvider } from "./hooks/UserProvider";
 
 const theme = {
   ...DefaultTheme,
@@ -29,20 +24,13 @@ const App = () => {
 
   if(!loaded) return null;
 
-  return (
-    <>
+    return (
       <NavigationContainer theme={theme}>
-        <Stack.Navigator screenOptions={{headerShown: false}}
-        initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home}/>
-          <Stack.Screen name="Details" component={Details}/>
-        </Stack.Navigator>
-        
+        <UserProvider>
+          <StackNavigator/>
+        </UserProvider>
       </NavigationContainer>
-      <NavBar/>
-    </>
-
-  );
+    )
 }
 
 export default App

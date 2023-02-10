@@ -1,22 +1,25 @@
-import { Text, View, SafeAreaView, FlatList } from 'react-native'
-import { useState } from 'react'
+import { Text, View, SafeAreaView, StyleSheet, FlatList } from 'react-native'
 
+import { useState } from 'react'
+import useUser from '../hooks/UserProvider'
 import { COLORS } from '../constants/theme'
 
 const Home = () => {
+
+  const {user} = useUser()
+  
+
   return (
-    <SafeAreaView style={{
+    <SafeAreaView backgroundColor={COLORS.primary} style={{
         flex:1,
-        borderWidth: 1,
-        borderColor: 'black',
-        width: 100,
-        height: 100
+        // borderWidth: 1,
+        // borderColor: 'black',
+        
       }}>
         <Text style={{
         borderWidth: 1,
         borderColor: 'black',
-        width: 100,
-        height: 100
+        
       }}>
             This is Home
         </Text>   
