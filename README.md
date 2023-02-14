@@ -51,8 +51,11 @@ How to start the application:
 
 (Coming soon)
 4. Start Native client:
+    lt --port 3000
+        Change url in constants
+        Change url in environments/production
     cd native
-    expo start --tunnel
+    npx expo start --tunnel
 
 ___________________________________________________________
 

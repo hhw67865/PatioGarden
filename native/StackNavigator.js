@@ -3,6 +3,9 @@ import React from 'react'
 import { createStackNavigator } from "@react-navigation/stack";
 import useUser from "./hooks/UserProvider";
 
+import { useEffect } from 'react';
+import { url } from './constants/localhost';
+
 import Home from "./screens/Home";
 import Details from "./screens/Details";
 import NavBar from "./components/NavBar";
@@ -13,7 +16,19 @@ const Stack = createStackNavigator()
 
 const StackNavigator = () => {
 
-    const { user } = useUser();
+    const { user, setUser } = useUser();
+
+    useEffect(()=>{
+        fetch(`${url}/api/authorized`)
+        .then(r=>{
+            if (r.ok) {
+                r.json().then(setUser)
+            }
+            else {
+                r.json().then(console.log)
+            }
+        })
+    },[])
 
     return user ? (
         <>
