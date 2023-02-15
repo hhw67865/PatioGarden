@@ -7,7 +7,9 @@ import { useEffect } from 'react';
 import { url } from './constants/localhost';
 
 import Home from "./screens/Home";
-import Details from "./screens/Details";
+import Account from './screens/Account';
+import Community from './screens/Community';
+import Plants from './screens/Plants';
 import NavBar from "./components/NavBar";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
@@ -35,7 +37,10 @@ const StackNavigator = () => {
             <Stack.Navigator screenOptions={{headerShown: false}}
             initialRouteName="Home">
                 <Stack.Screen name="Home" component={Home}/>
-                <Stack.Screen name="Details" component={Details}/>
+                <Stack.Screen name="Plants" component={Plants}/>
+                <Stack.Screen name="Account" component={Account}/>
+                <Stack.Screen name="Community" component={Community}/>
+
             </Stack.Navigator>
             <NavBar/>
         </>

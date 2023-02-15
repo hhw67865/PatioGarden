@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View,Text, StyleSheet, SafeAreaView} from 'react-native';
 import { Icon } from '@rneui/themed';
 import { COLORS } from '../constants/theme';
+import { useNavigation } from '@react-navigation/native';
+import { pixelRatio } from '../constants/pixelRatio';
+
 
 
 const NavBar = () => {
+
+    let navigation = useNavigation()
+    const [screen, setScreen] = useState('Home')
+
     return (
         <SafeAreaView style={{
             borderTopWidth: 0.5,
@@ -15,22 +22,42 @@ const NavBar = () => {
                 <Icon
                     name='home-outline'
                     type='ionicon'
-                    color={COLORS.secondary}
+                    color={screen==="Home"?COLORS.secondary:COLORS.tertiary}
+                    onPress={()=>{
+                        navigation.navigate('Home')
+                        setScreen('Home')
+                    }}
+                    style={styles.navIcon}
                 />
                 <Icon
                     name='people-outline'
                     type='ionicon'
-                    color={COLORS.tertiary}
+                    color={screen==="Community"?COLORS.secondary:COLORS.tertiary}
+                    onPress={()=>{
+                        navigation.navigate('Community')
+                        setScreen('Community')
+                    }}
+                    style={styles.navIcon}
                 />
                 <Icon
                     name='leaf-outline'
                     type='ionicon'
-                    color={COLORS.tertiary}
+                    color={screen==="Plants"?COLORS.secondary:COLORS.tertiary}
+                    onPress={()=>{
+                        navigation.navigate('Plants')
+                        setScreen('Plants')
+                    }}
+                    style={styles.navIcon}
                 />
                 <Icon
                     name='person-outline'
                     type='ionicon'
-                    color={COLORS.tertiary}
+                    color={screen==="Account"?COLORS.secondary:COLORS.tertiary}
+                    onPress={()=>{
+                        navigation.navigate('Account')
+                        setScreen('Account')
+                    }}
+                    style={styles.navIcon}
                 />
                 
             </View>
@@ -43,10 +70,10 @@ const styles = StyleSheet.create({
     headerContainer: {
         flexDirection:'row',
         justifyContent:'space-around',
-        alignItems:"center",
-        padding:10,
-        paddingVertical:20
-        
+        alignItems:"center",        
+    },
+    navIcon: {
+        padding: pixelRatio(6)
     }
 })
 

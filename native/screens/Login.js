@@ -63,31 +63,14 @@ const Login = ({navigation}) => {
             </View>
             {error?<Text style={{fontFamily: "SansRegular",fontSize: pixelRatio(5), color:"red"}}>{error}</Text>:<Text style={{fontFamily: "SansRegular",fontSize: pixelRatio(5)}}>{''}</Text>}
             <TextInput
-                style={{
-                borderRadius: 8,
-                height: 40,
-                width: "85%",
-                borderColor: 'gray',
-                borderWidth: 1,
-                margin: pixelRatio(2),
-                paddingHorizontal: pixelRatio(4)
-                }}
+                style={styles.input}
                 placeholder="username"
                 onChangeText={setUsername}
                 value={username}
             />
             <TextInput
                 secureTextEntry
-                style={{
-                borderRadius: 8,
-                height: 40,
-                width: "85%",
-                borderColor: 'gray',
-                borderWidth: 1,
-                margin: pixelRatio(2),
-                marginBottom: pixelRatio(10),
-                paddingHorizontal: pixelRatio(4)
-                }}
+                style={styles.input}
                 onChangeText={setPassword}
                 returnKeyType="done"
                 placeholder="password"
@@ -95,7 +78,7 @@ const Login = ({navigation}) => {
                 onSubmitEditing={handleLogin}
             />
             
-            <Button title="Login" color={COLORS.secondary} onPress={handleLogin}/>
+            <Button title="Login" style={{marginTop: pixelRatio(10)}} color={COLORS.secondary} onPress={handleLogin}/>
 
             <View style={{
                 marginTop: pixelRatio(6),
@@ -135,6 +118,17 @@ const styles = StyleSheet.create({
         flexDirection:"row",        
         alignItems:"center",
         marginBottom: pixelRatio(15)
+    },
+    input: {
+        borderRadius: 8,
+        height: 40,
+        width: "85%",
+        borderColor: 'gray',
+        borderWidth: 1,
+        margin: pixelRatio(2),
+        paddingHorizontal: pixelRatio(4),
+        fontFamily: "SansRegular",
+        fontSize: pixelRatio(5)
     }
 })
 

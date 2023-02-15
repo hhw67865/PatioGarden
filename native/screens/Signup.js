@@ -2,6 +2,7 @@ import { Text, View, SafeAreaView, StyleSheet, TextInput, Image, PixelRatio, Key
 import React from 'react'
 import { COLORS } from '../constants/theme'
 import { useState } from 'react';
+import { Input } from '@rneui/themed';
 
 import { Button } from '@rneui/themed';
 import { pixelRatio } from '../constants/pixelRatio';
@@ -17,6 +18,8 @@ const Signup = ({navigation}) => {
   })
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
   const [errors, setErrors] = useState(null)
+  const [availability,setAvailability] = useState(false)
+  const [check, setCheck] = useState(false)
   
   function handleSignup() {
     if (signupData.password!==passwordConfirmation) {
@@ -49,6 +52,24 @@ const Signup = ({navigation}) => {
     
   }
 
+  function checkAvailability () {
+    setCheck(true)
+    if (signupData.username.length<4){
+      setAvailability(false)
+      return
+    }
+    fetch(`${url}/api/usernames`)
+    .then(r=>r.json())
+    .then(list=>{
+      if (list.usernames[signupData.username.toLowerCase()]) {
+        setAvailability(false)
+      }
+      else {
+        setAvailability(true)
+      }
+    })
+  }
+
   return (
     <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
       <SafeAreaView backgroundColor={COLORS.primary} style={styles.mainContainer}>
@@ -62,32 +83,24 @@ const Signup = ({navigation}) => {
               Join PatioGarden
           </Text>
         </View>
-        {errors?errors.map((error, i)=><Text key={i} style={{fontFamily: "SansRegular",fontSize: pixelRatio(5), color:"red"}}>{error}</Text>):<Text style={{fontFamily: "SansRegular",fontSize: pixelRatio(5)}}>{''}</Text>}
 
-        <TextInput
-          style={{
-          borderRadius: 8,
-          height: 40,
-          width: "85%",
-          borderColor: 'gray',
-          borderWidth: 1,
-          margin: pixelRatio(2),
-          paddingHorizontal: pixelRatio(4)
+        <Input
+          inputContainerStyle={{borderBottomWidth:0}}
+          inputStyle={{
+            fontFamily: "SansRegular",
+            fontSize: pixelRatio(5)
           }}
+          containerStyle={styles.input}
           placeholder="username"
-          onChangeText={text=>setSignupData({...signupData, username: text})}
+          onChangeText={text=>{setSignupData({...signupData, username: text})}}
           value={signupData.username}
+          rightIcon={check?availability?{type: "ionicon", name:"checkmark-circle-outline", color: "green"}:{type: "ionicon", name:"close-outline", color: "red"}:null}
+          rightIconContainerStyle={{height:"100%"}}
+          onBlur={checkAvailability}
+          onFocus={()=>setCheck(false)}
         />
         <TextInput
-          style={{
-          borderRadius: 8,
-          height: 40,
-          width: "85%",
-          borderColor: 'gray',
-          borderWidth: 1,
-          margin: pixelRatio(2),
-          paddingHorizontal: pixelRatio(4)
-          }}
+          style={styles.input}
           keyboardType="email-address"
           placeholder="email"
           onChangeText={text=>setSignupData({...signupData, email: text})}
@@ -96,15 +109,7 @@ const Signup = ({navigation}) => {
         />
         <TextInput
           secureTextEntry
-          style={{
-          borderRadius: 8,
-          height: 40,
-          width: "85%",
-          borderColor: 'gray',
-          borderWidth: 1,
-          margin: pixelRatio(2),          
-          paddingHorizontal: pixelRatio(4)
-          }}
+          style={styles.input}
           // onBlur={()=>Keyboard.dismiss()}
           returnKeyType="done"
           placeholder="password"
@@ -113,23 +118,16 @@ const Signup = ({navigation}) => {
         />
         <TextInput
           secureTextEntry
-          style={{
-          borderRadius: 8,
-          height: 40,
-          width: "85%",
-          borderColor: 'gray',
-          borderWidth: 1,
-          margin: pixelRatio(2),
-          marginBottom: pixelRatio(10),
-          paddingHorizontal: pixelRatio(4)
-          }}
+          style={styles.input}
           returnKeyType="done"
           placeholder="confirm password"
           onChangeText={setPasswordConfirmation}
           value={passwordConfirmation}
           onSubmitEditing={handleSignup}
         />
-        <Button title="Sign up!" color={COLORS.secondary} onPress={handleSignup}/>
+        {errors?errors.map((error, i)=><Text key={i} style={{fontFamily: "SansRegular",fontSize: pixelRatio(5), color:"red"}}>{error}</Text>):<Text style={{fontFamily: "SansRegular",fontSize: pixelRatio(5)}}>{''}</Text>}
+
+        <Button title="Sign up!" style={{marginTop: pixelRatio(10)}} color={COLORS.secondary} onPress={handleSignup}/>
 
         <View style={{
                 marginTop: pixelRatio(6),
@@ -154,14 +152,25 @@ const Signup = ({navigation}) => {
 
 const styles = StyleSheet.create({
   mainContainer: {      
-      flex:1,  
-      justifyContent:'center',
-      alignItems:"center"
+    flex:1,  
+    justifyContent:'center',
+    alignItems:"center"
   },
   titleContainer: {
-      flexDirection:"row",        
-      alignItems:"center",
-      marginBottom: pixelRatio(20)
+    flexDirection:"row",        
+    alignItems:"center",
+    marginBottom: pixelRatio(20)
+  },
+  input: {
+    borderRadius: 8,
+    height: 40,
+    width: "85%",
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: pixelRatio(2),
+    paddingHorizontal: pixelRatio(4),
+    fontFamily: "SansRegular",
+    fontSize: pixelRatio(5)    
   }
 })
 
