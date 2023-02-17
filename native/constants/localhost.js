@@ -1,1 +1,1 @@
-export const url = "https://rich-carrots-remain-174-163-81-218.loca.lt"
+export const url = "https://vast-hands-walk-174-163-81-218.loca.lt"

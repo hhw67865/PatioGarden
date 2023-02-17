@@ -20,6 +20,7 @@ const App = () => {
     SansMedium: require("./assets/fonts/OpenSans-Medium.ttf"),
     SansRegular: require("./assets/fonts/OpenSans-Regular.ttf"),
     SansLight: require("./assets/fonts/OpenSans-Light.ttf"),
+    SansSemiBoldItalic: require("./assets/fonts/OpenSans-SemiBoldItalic.ttf")
   })
 
   if(!loaded) return null;
