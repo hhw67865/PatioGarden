@@ -14,14 +14,14 @@ import ProfilePosts from '../components/ProfilePosts'
 
 const Account = () => {
 
-  const {user, setUser} = useUser()
+  const {user, setUser, update} = useUser()
   const [userPosts, setUserPosts] = useState([])
 
   useEffect(() => {
     fetch(`${url}/api/users/${user.username}/posts`)
     .then(r=>r.json())
     .then(setUserPosts)
-  }, []);
+  }, [update]);
 
   
   if (user===null){
@@ -32,7 +32,7 @@ const Account = () => {
     <SafeAreaView backgroundColor={COLORS.primary} style={{
         flex:1    
       }}>
-        <ScrollView style={{padding: pixelRatio(7)}}>
+        <ScrollView bounces style={{padding: pixelRatio(7)}}>
           
           <ProfileBanner user={user} setUser={setUser}/>
           <ProfileInformation user={user}/>

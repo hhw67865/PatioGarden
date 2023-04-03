@@ -9,7 +9,7 @@ import { url } from '../constants/localhost';
 
 
 
-const ProfileBanner = ({user}) => {
+const ProfileBanner = ({user, setUser}) => {
 
     const [visible, setVisible] = useState(false)   
   

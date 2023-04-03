@@ -13,12 +13,13 @@ import Plants from './screens/Plants';
 import NavBar from "./components/NavBar";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
+import Comments from './screens/Comments';
 
 const Stack = createStackNavigator()
 
 const StackNavigator = () => {
 
-    const { user, setUser } = useUser();
+    const { user, setUser, update } = useUser();
 
     useEffect(()=>{
         fetch(`${url}/api/authorized`)
@@ -30,7 +31,7 @@ const StackNavigator = () => {
                 r.json().then(console.log)
             }
         })
-    },[])
+    },[update])
 
     return user ? (
         <>
@@ -40,9 +41,10 @@ const StackNavigator = () => {
                 <Stack.Screen name="Plants" component={Plants}/>
                 <Stack.Screen name="Account" component={Account}/>
                 <Stack.Screen name="Community" component={Community}/>
-
+                <Stack.Screen name="Comments" component={Comments} options={{headerShown: true}} />                
             </Stack.Navigator>
             <NavBar/>
+            
         </>
         ) : (
             <Stack.Navigator screenOptions={{headerShown: false}}

@@ -6,11 +6,18 @@ const UserContext = createContext({})
 export const UserProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
+    const [update, setUpdate] = useState(null)
+
+    function refresh () {
+      setUpdate(prev=>!prev)
+    }
 
   return (
     <UserContext.Provider value={{
         user,
-        setUser
+        setUser,
+        refresh,
+        update
     }}>
       {children}
     </UserContext.Provider>

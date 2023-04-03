@@ -36,6 +36,13 @@ https://excalidraw.com/#json=zrqXD0fU2K88EDcaBtMTz,G5y_gXzP2ssXiUQUUorxQA
 
 ___________________________________________________________
 
+Download dependancies:
+
+1. bundle install
+2. rails db:migrate
+3. rails db:seed
+
+
 How to start the application:
 
 1. Start Postgresql server, if windows user:

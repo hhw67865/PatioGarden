@@ -1,34 +1,32 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import { Avatar, Chip } from '@rneui/base';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import { pixelRatio } from '../constants/pixelRatio';
-import { url } from '../constants/localhost';
-import { COLORS } from '../constants/theme';
+
+import PostCardUserBar from './PostCardUserBar';
+import PostCardImage from './PostCardImage';
+import PostCardUserInteraction from './PostCardUserInteraction';
+import PostCardBody from './PostCardBody';
+import useUser from '../hooks/UserProvider'
+
 
 const PostCard = ({post}) => {
+
+    const {user} = useUser()
+    const [liked, setLiked] = useState(
+        post.liked_users.filter((like)=>user.username.toLowerCase()===like.username.toLowerCase()).length>0
+    )
     return (
-        <View>
-            <View style={{flexDirection:"row"}}>
-                <Avatar
-                size={pixelRatio(12)}
-                rounded
-                source={{ uri: post.user.image_url?post.user.image_url.replace("http://localhost:3000", url):"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" }}
-                />
-                <Text style={{flexGrow:1, alignSelf:"center", paddingLeft:pixelRatio(3), fontSize:pixelRatio(5), fontFamily: "SansSemiBold"}}>{post.user.username}</Text>
-                <Text style={{alignSelf:"center"}}>{post.plant.name}</Text>
-            </View>
-            <View style={{flexDirection:"row"}}>
-                <Chip
-                title="Outlined Chip"
-                type="outline"
-                size='sm'            
-                />
-                <Text style={{flexGrow:1}}>Tags</Text>                
-            </View>
+        <View style={{marginVertical: pixelRatio(5)}}>
+            <PostCardUserBar post={post}/>
+            <PostCardImage liked={liked} setLiked={setLiked} post={post}/>
+            <PostCardUserInteraction liked={liked} setLiked={setLiked} post={post}/>
+            <PostCardBody post={post}/>
         </View>
     );
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    
+})
 
 export default PostCard;

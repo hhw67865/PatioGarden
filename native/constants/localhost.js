@@ -1,1 +1,1 @@
-export const url = "https://tender-cameras-post-174-163-81-218.loca.lt"
+export const url = "https://cuddly-vans-yell-174-163-81-218.loca.lt"
