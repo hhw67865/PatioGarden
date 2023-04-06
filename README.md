@@ -60,7 +60,7 @@ How to start the application:
 4. Start Native client:
     lt --port 3000
         Change url in constants
-        Change url in environments/production
+        Change url in environments/development
     cd native
     npx expo start --tunnel
 

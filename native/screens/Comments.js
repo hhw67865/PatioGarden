@@ -1,22 +1,31 @@
-import React from 'react';
-import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import { url } from '../constants/localhost';
+import CommentCard from '../components/CommentCard';
+import { COLORS } from '../constants/theme';
+import { pixelRatio } from '../constants/pixelRatio';
 
 const Comments = ({route}) => {
 
     const { post } = route.params;
+    const [comments, setComments] = useState([])
 
     useEffect(()=>{
-        fetch(`${url}}/api/posts/${post.id}/comments`)
+        fetch(`${url}/api/posts/${post.id}/comments`)
         .then(r=>r.json())
         .then(setComments)
     },[])
 
     return (
-        <SafeAreaView style={{
+        <SafeAreaView backgroundColor={COLORS.primary} style={{
             flex:1    
-          }}>
-            <Text>This is Comments {post.id}</Text>
+          }}>            
+            <ScrollView bounces style={{padding: pixelRatio(4)}}>
+                {comments.map((comment,i)=><CommentCard key={i} comment={comment} />)}
+                
+                <View style={{marginBottom: pixelRatio(6)}}/>
+            </ScrollView>
+
         </SafeAreaView>
     );
 }
