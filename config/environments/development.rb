@@ -8,7 +8,7 @@ Rails.application.routes.default_url_options = {
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.hosts << "wicked-crabs-fold-174-163-81-218.loca.lt"
+  config.hosts << "funny-cloths-smile-174-163-81-218.loca.lt"
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

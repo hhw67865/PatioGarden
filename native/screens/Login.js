@@ -72,10 +72,10 @@ const Login = ({navigation}) => {
                 secureTextEntry
                 style={styles.input}
                 onChangeText={setPassword}
-                returnKeyType="done"
                 placeholder="password"
                 value={password}
                 onSubmitEditing={handleLogin}
+                returnKeyType="done"
             />
             
             <Button title="Login" style={{marginTop: pixelRatio(10)}} color={COLORS.secondary} onPress={handleLogin}/>
