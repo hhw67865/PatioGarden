@@ -14,6 +14,7 @@ import NavBar from "./components/NavBar";
 import Login from "./screens/Login";
 import Signup from "./screens/Signup";
 import Comments from './screens/Comments';
+import EditProfile from './screens/EditProfile';
 
 const Stack = createStackNavigator()
 
@@ -41,7 +42,8 @@ const StackNavigator = () => {
                 <Stack.Screen name="Plants" component={Plants}/>
                 <Stack.Screen name="Account" component={Account}/>
                 <Stack.Screen name="Community" component={Community}/>
-                <Stack.Screen name="Comments" component={Comments} options={{headerShown: true}} />                
+                <Stack.Screen name="Comments" component={Comments} options={{headerShown: true}} /> 
+                <Stack.Screen name="Edit Profile" component={EditProfile} options={{headerShown: true}} />
             </Stack.Navigator>
             <NavBar/>
             

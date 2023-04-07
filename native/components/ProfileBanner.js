@@ -5,13 +5,15 @@ import { useState } from 'react';
 import { pixelRatio } from '../constants/pixelRatio';
 
 import { url } from '../constants/localhost';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
 const ProfileBanner = ({user, setUser}) => {
 
-    const [visible, setVisible] = useState(false)   
+    const [visible, setVisible] = useState(false) 
+    let navigation = useNavigation()  
   
     const toggleOverlay = () => {
       setVisible(!visible)
@@ -54,6 +56,10 @@ const ProfileBanner = ({user, setUser}) => {
                 borderRadius: 30
               }}
               >
+                <Button title="Edit Profile" type="clear" onPress={()=>{
+                  navigation.navigate('Edit Profile')
+                  toggleOverlay()
+                  }}/>
                 <Button title="Logout" type="clear" onPress={handleLogout}/>
             </Overlay>
           </View>
